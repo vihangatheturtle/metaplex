@@ -1,6 +1,7 @@
 import { Paper } from '@material-ui/core';
 import Countdown from 'react-countdown';
 import { useEffect, useMemo, useState, useCallback } from 'react';
+import * as anchor from '@project-serum/anchor';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   awaitTransactionSignatureConfirmation,
