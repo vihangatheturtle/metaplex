@@ -4,7 +4,7 @@ export const CMInput = () => {
         <input
           placeholder="Enter CMID"
         />
-        <button onClick="selectNewCMID()">
+        <button onClick={selectNewCMID}>
           Use CMID
         </button>
       </div>
