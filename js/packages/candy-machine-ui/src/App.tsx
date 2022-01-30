@@ -42,7 +42,18 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   }
 };
 
-alert(0)
+function getParameterByName(name, url = window.location.href) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+if (getParameterByName('cmid') == null) {
+  location = 'https://hovermint.com'
+}
 
 const candyMachineId = getCandyMachineId();
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
