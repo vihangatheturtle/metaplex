@@ -42,7 +42,7 @@ if (getQuery('cmid') === null || getQuery('cmid') === '') {
 
 console.log("Detected CMID in query: " + getQuery('cmid'))
 
-var rawCandyMachineID = getQuery('cmid');
+var string: rawCandyMachineID = getQuery('cmid');
 if (rawCandyMachineID === null) {
   rawCandyMachineID = '';
 }
