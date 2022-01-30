@@ -51,6 +51,7 @@ export const MintButton = ({
 
   return (
     <CTAButton
+      id="NFTMintButton"
       disabled={
         clicked ||
         candyMachine?.state.isSoldOut ||

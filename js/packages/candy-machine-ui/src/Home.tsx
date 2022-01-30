@@ -196,7 +196,6 @@ const Home = (props: HomeProps) => {
                     options={{ autoShowModal: false }}
                   >
                     <MintButton
-                      id="NFTMintButton"
                       candyMachine={candyMachine}
                       isMinting={isUserMinting}
                       onMint={onMint}
