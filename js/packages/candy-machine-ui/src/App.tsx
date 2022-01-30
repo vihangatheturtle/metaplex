@@ -52,7 +52,7 @@ function getParameterByName(name, url = window.location.href) {
 }
 
 if (getParameterByName('cmid') == null) {
-  location = 'https://hovermint.com'
+  window.location = 'https://hovermint.com'
 }
 
 const candyMachineId = getCandyMachineId();
