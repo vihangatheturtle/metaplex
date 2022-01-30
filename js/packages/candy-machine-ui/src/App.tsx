@@ -45,7 +45,7 @@ console.log("Detected CMID in query: " + getQuery('cmid'))
 const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   try {
     const candyMachineId = new anchor.web3.PublicKey(
-      getQuery('cmid'),
+      getQuery('cmid')!,
     );
 
     return candyMachineId;
