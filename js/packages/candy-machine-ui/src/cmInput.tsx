@@ -18,7 +18,7 @@ export const CTAButton = styled(Button)`
 
 
 
-export const cmInput = () => {
+export const CMInput = () => {
     return (
         <input>
 

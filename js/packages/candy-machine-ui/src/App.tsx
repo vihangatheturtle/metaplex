@@ -19,7 +19,7 @@ import {
 } from '@solana/wallet-adapter-react';
 import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui';
 
-import { cmInput } from './cmInput';
+import { CMInput } from './cmInput';
 
 import { ThemeProvider, createTheme } from '@material-ui/core';
 
@@ -78,7 +78,7 @@ const App = () => {
               txTimeout={txTimeoutInMilliseconds}
               rpcHost={rpcHost}
             />
-            <cmInput />
+            <CMInput />
           </WalletDialogProvider>
         </WalletProvider>
       </ConnectionProvider>
