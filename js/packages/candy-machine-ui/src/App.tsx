@@ -33,7 +33,7 @@ const theme = createTheme({
 
 function getQuery(key: string) {
   var query = new URLSearchParams(window.location.search);
-  return query.get(key)
+  return query.get(key) ? ''
 }
 
 if (getQuery('cmid') === null || getQuery('cmid') === '') {
@@ -42,10 +42,7 @@ if (getQuery('cmid') === null || getQuery('cmid') === '') {
 
 console.log("Detected CMID in query: " + getQuery('cmid'))
 
-var string: rawCandyMachineID = getQuery('cmid');
-if (rawCandyMachineID === null) {
-  rawCandyMachineID = '';
-}
+var rawCandyMachineID = getQuery('cmid');
 
 const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   try {
