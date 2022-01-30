@@ -60,6 +60,7 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               ? 'PRESALE'
               : 'LIVE'
           }
+          cm={candyMachine}
         />
       </Grid>
     </Grid>

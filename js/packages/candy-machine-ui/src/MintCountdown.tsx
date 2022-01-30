@@ -58,6 +58,7 @@ interface MintCountdownProps {
   style?: React.CSSProperties;
   status?: string;
   onComplete?: () => void;
+  cm?: anchor.web3.PublicKey;
 }
 
 interface MintCountdownRender {
@@ -73,7 +74,7 @@ function AutoMint() {
     (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
     (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
     const mintTxId = (
-      await mintOneToken(props.candyMachineId, wallet.publicKey)
+      await mintOneToken(props.cm, wallet.publicKey)
     )[0];
 
     let status: any = { err: true };
