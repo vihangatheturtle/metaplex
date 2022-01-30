@@ -45,7 +45,7 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
 };
 
 const query = new URLSearchParams(window.location.search);
-alert(query.get('token'))
+alert(query.get('cmid'))
 
 const candyMachineId = getCandyMachineId();
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
