@@ -42,6 +42,11 @@ if (getQuery('cmid') === null || getQuery('cmid') === '') {
 
 console.log("Detected CMID in query: " + getQuery('cmid'))
 
+rawCandyMachineID = getQuery('cmid');
+if (rawCandyMachineID === null) {
+  rawCandyMachineID = '';
+}
+
 const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   try {
     const candyMachineId = new anchor.web3.PublicKey(
@@ -86,7 +91,7 @@ const App = () => {
           <WalletDialogProvider>
             <Home
               candyMachineId={candyMachineId}
-              rawCandyMachineID={getQuery('cmid')}
+              rawCandyMachineID={rawCandyMachineID}
               connection={connection}
               startDate={startDateSeed}
               txTimeout={txTimeoutInMilliseconds}
