@@ -4,13 +4,13 @@ export const CMInput = () => {
         <input
           placeholder="Enter CMID"
         />
-        <button id="selectCmid">
+        <button onClick="selectNewCMID()">
           Use CMID
         </button>
       </div>
     );
 }
 
-document.getElementById('selectCmid').click(() => {
+function selectNewCMID() {
   alert(0)
-});
+}
