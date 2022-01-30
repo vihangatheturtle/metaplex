@@ -62,7 +62,7 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
 };
 
 const candyMachineId = getCandyMachineId();
-const network = 'mainnet' as WalletAdapterNetwork;
+const network = 'mainnet-beta' as WalletAdapterNetwork;
 const rpcHost = 'https://solana-api.projectserum.com'!;
 const connection = new anchor.web3.Connection(rpcHost
   ? rpcHost
