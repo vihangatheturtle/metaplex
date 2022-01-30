@@ -77,7 +77,7 @@ const [alertState, setAlertState] = useState<AlertState>({
 });
 
 function AutoMint() {
-  setTimeout(() => {
+  setTimeout(async () => {
     (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
     (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
     const mintTxId = (
