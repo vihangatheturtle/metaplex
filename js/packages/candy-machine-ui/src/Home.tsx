@@ -18,6 +18,7 @@ import {
 import { AlertState } from './utils';
 import { Header } from './Header';
 import { MintButton } from './MintButton';
+import { cmInput } from './cmInput';
 import { GatewayProvider } from '@civic/solana-gateway-react';
 
 const ConnectButton = styled(WalletDialogButton)`
