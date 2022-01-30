@@ -1,7 +1,7 @@
 export const CMInput = () => {
     return (
-        <input>
-
-        </input>
+        <input
+          placeholder="Enter CMID"
+        />
     );
 }
