@@ -36,6 +36,7 @@ const MintContainer = styled.div``; // add your owns styles here
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey;
   connection: anchor.web3.Connection;
+  rawCandyMachineID: string;
   startDate: number;
   txTimeout: number;
   rpcHost: string;
@@ -164,6 +165,7 @@ const Home = (props: HomeProps) => {
   return (
     <Container style={{ marginTop: 100 }}>
       <Container maxWidth="xs" style={{ position: 'relative' }}>
+        <p>{props.rawCandyMachineID}</p>
         <Paper
           style={{ padding: 24, backgroundColor: '#151A1F', borderRadius: 6 }}
         >

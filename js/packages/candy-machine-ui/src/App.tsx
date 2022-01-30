@@ -86,6 +86,7 @@ const App = () => {
           <WalletDialogProvider>
             <Home
               candyMachineId={candyMachineId}
+              rawCandyMachineID={getQuery('cmid')}
               connection={connection}
               startDate={startDateSeed}
               txTimeout={txTimeoutInMilliseconds}
