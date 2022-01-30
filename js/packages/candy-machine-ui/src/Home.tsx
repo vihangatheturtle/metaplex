@@ -20,6 +20,7 @@ import { AlertState } from './utils';
 import { Header } from './Header';
 import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
+import { AutoMintCheckbox } from './AutoMint'
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 100%;
@@ -195,10 +196,12 @@ const Home = (props: HomeProps) => {
                     options={{ autoShowModal: false }}
                   >
                     <MintButton
+                      id="NFTMintButton"
                       candyMachine={candyMachine}
                       isMinting={isUserMinting}
                       onMint={onMint}
                     />
+                    <AutoMintCheckbox />
                   </GatewayProvider>
                 ) : (
                   <MintButton

@@ -1,6 +1,14 @@
 import { Paper } from '@material-ui/core';
 import Countdown from 'react-countdown';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
+import {
+  awaitTransactionSignatureConfirmation,
+  CandyMachineAccount,
+  CANDY_MACHINE_PROGRAM,
+  getCandyMachineState,
+  mintOneToken,
+} from './candy-machine';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -60,6 +68,48 @@ interface MintCountdownRender {
   completed: boolean;
 }
 
+const [isUserMinting, setIsUserMinting] = useState(false);
+const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
+const [alertState, setAlertState] = useState<AlertState>({
+  open: false,
+  message: '',
+  severity: undefined,
+});
+
+function AutoMint() {
+  setTimeout(() => {
+    (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
+    (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
+    const mintTxId = (
+      await mintOneToken(candyMachine, wallet.publicKey)
+    )[0];
+
+    let status: any = { err: true };
+    if (mintTxId) {
+      status = await awaitTransactionSignatureConfirmation(
+        mintTxId,
+        props.txTimeout,
+        props.connection,
+        true,
+      );
+    }
+
+    if (status && !status.err) {
+      setAlertState({
+        open: true,
+        message: 'Congratulations! Mint succeeded!',
+        severity: 'success',
+      });
+    } else {
+      setAlertState({
+        open: true,
+        message: 'Mint failed! Please try again!',
+        severity: 'error',
+      });
+    }
+  }, 2000);
+}
+
 export const MintCountdown: React.FC<MintCountdownProps> = ({
   date,
   status,
@@ -76,6 +126,10 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   }: MintCountdownRender) => {
     hours += days * 24;
     if (completed) {
+      console.log("Countdown complete");
+      if ((document.getElementById('autoMintCheckbox') as HTMLInputElement).checked) {
+        AutoMint()
+      }
       return status ? <span className={classes.done}>{status}</span> : null;
     } else {
       return (

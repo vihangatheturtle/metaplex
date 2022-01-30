@@ -14,5 +14,5 @@ export const CMInput = () => {
 
 function selectNewCMID() {
   console.log("Switching CMID");
-  window.location.href = 'https://' + window.location.host + '?cmid=' + (document.getElementById('cmidTB') as HTMLInputElement).value
+  window.location.href = 'https://' + window.location.host + '?cmid=' + (document.getElementById('cmidTB') as HTMLInputElement).value;
 }
