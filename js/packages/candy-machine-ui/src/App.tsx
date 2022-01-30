@@ -42,6 +42,8 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   }
 };
 
+alert(0)
+
 const candyMachineId = getCandyMachineId();
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
 const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!;
