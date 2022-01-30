@@ -13,5 +13,5 @@ export const CMInput = () => {
 }
 
 function selectNewCMID() {
-  alert(document.getElementById('cmidTB').value)
+  alert((document.getElementById('cmidTB') as HTMLInputElement).value)
 }
