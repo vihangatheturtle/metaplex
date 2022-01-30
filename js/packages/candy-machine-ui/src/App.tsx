@@ -44,7 +44,7 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   }
 };
 
-const query = new URLSearchParams(this.props.location.search);
+const query = new URLSearchParams(window.location.search);
 alert(query.get('token'))
 
 const candyMachineId = getCandyMachineId();
