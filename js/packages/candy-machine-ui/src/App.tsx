@@ -42,7 +42,7 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   }
 };
 
-function getParameterByName(name, url = window.location.href) {
+function getParameterByName(name: string, url = window.location.href) {
   name = name.replace(/[\[\]]/g, '\\$&');
   var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
       results = regex.exec(url);
