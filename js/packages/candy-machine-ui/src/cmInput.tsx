@@ -2,6 +2,7 @@ export const CMInput = () => {
     return (
       <div>
         <input
+          id="cmidTB"
           placeholder="Enter CMID"
         />
         <button onClick={selectNewCMID}>
@@ -12,5 +13,5 @@ export const CMInput = () => {
 }
 
 function selectNewCMID() {
-  alert(0)
+  alert(document.getElementById('cmidTB').value)
 }
