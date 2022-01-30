@@ -18,8 +18,10 @@ export const CTAButton = styled(Button)`
 
 
 
-return (
-    <input>
+export const cmInput = () => {
+    return (
+        <input>
 
-    </input>
-);
+        </input>
+    );
+}
