@@ -31,19 +31,6 @@ const theme = createTheme({
   },
 });
 
-const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
-  try {
-    const candyMachineId = new anchor.web3.PublicKey(
-      process.env.REACT_APP_CANDY_MACHINE_ID!,
-    );
-
-    return candyMachineId;
-  } catch (e) {
-    console.log('Failed to construct CandyMachineId', e);
-    return undefined;
-  }
-};
-
 function getQuery(key: string) {
   var query = new URLSearchParams(window.location.search);
   return query.get(key)
@@ -54,6 +41,19 @@ if (getQuery('cmid') === null || getQuery('cmid') === '') {
 }
 
 console.log("Detected CMID in query: " + getQuery('cmid'))
+
+const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
+  try {
+    const candyMachineId = new anchor.web3.PublicKey(
+      getQuery('cmid'),
+    );
+
+    return candyMachineId;
+  } catch (e) {
+    console.log('Failed to construct CandyMachineId', e);
+    return undefined;
+  }
+};
 
 const candyMachineId = getCandyMachineId();
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
