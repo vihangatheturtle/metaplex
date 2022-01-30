@@ -23,6 +23,8 @@ import { CMInput } from './cmInput';
 
 import { ThemeProvider, createTheme } from '@material-ui/core';
 
+const URLSearchParams = window.URLSearchParams;
+
 const theme = createTheme({
   palette: {
     type: 'dark',
