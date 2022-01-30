@@ -201,7 +201,9 @@ const Home = (props: HomeProps) => {
                       isMinting={isUserMinting}
                       onMint={onMint}
                     />
-                    <AutoMintCheckbox />
+                    <AutoMintCheckbox
+                      candyMachineId={candyMachineId}
+                    />
                   </GatewayProvider>
                 ) : (
                   <MintButton

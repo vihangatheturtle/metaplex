@@ -68,20 +68,12 @@ interface MintCountdownRender {
   completed: boolean;
 }
 
-const [isUserMinting, setIsUserMinting] = useState(false);
-const [candyMachine, setCandyMachine] = useState<CandyMachineAccount>();
-const [alertState, setAlertState] = useState<AlertState>({
-  open: false,
-  message: '',
-  severity: undefined,
-});
-
 function AutoMint() {
   setTimeout(async () => {
     (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
     (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
     const mintTxId = (
-      await mintOneToken(candyMachine, wallet.publicKey)
+      await mintOneToken(props.candyMachineId, wallet.publicKey)
     )[0];
 
     let status: any = { err: true };
