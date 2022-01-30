@@ -33,7 +33,11 @@ const theme = createTheme({
 
 function getQuery(key: string) {
   var query = new URLSearchParams(window.location.search);
-  return query.get(key) ? ''
+  var res = query.get(key)
+  if (res === null) {
+    res = ''
+  }
+  return res;
 }
 
 if (getQuery('cmid') === null || getQuery('cmid') === '') {
