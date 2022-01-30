@@ -49,7 +49,7 @@ function getQuery(key: string) {
   return query.get(key)
 }
 
-if (getQuery('cmid') == null || getQuery('cmid') == '') {
+if (getQuery('cmid') === null || getQuery('cmid') === '') {
   window.location.href = 'https://hovermint.com'
 }
 
