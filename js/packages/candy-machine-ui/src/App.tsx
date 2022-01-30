@@ -53,6 +53,8 @@ if (getQuery('cmid') === null || getQuery('cmid') === '') {
   window.location.href = 'https://hovermint.com'
 }
 
+console.log("Detected CMID in query: " + getQuery('cmid'))
+
 const candyMachineId = getCandyMachineId();
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
 const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!;
