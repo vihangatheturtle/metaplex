@@ -45,7 +45,7 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
 function getQueryString(searchKey: string) {
   var querys = window.location.search.substring(1).split('&');
   var i = 0;
-  for (i<querys.length; i++) {
+  for (i<querys.length; i++;) {
       var key = querys[i].split('=')[0];
       if (key == searchKey) {
           return querys[i].split('=')[1];
