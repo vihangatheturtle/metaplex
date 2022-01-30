@@ -42,16 +42,17 @@ const getCandyMachineId = (): anchor.web3.PublicKey | undefined => {
   }
 };
 
-function getParameterByName(name: string, url = window.location.href) {
-  name = name.replace(/[\[\]]/g, '\\$&');
-  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-      results = regex.exec(url);
-  if (!results) return null;
-  if (!results[2]) return '';
-  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+function getQueryString(searchKey: string) {
+  var querys = window.location.search.substring(1).split('&');
+  for (i=0; i<querys.length; i++) {
+      var key = querys[i].split('=')[0];
+      if (key == searchKey) {
+          return querys[i].split('=')[1];
+      }
+  }
 }
 
-if (getParameterByName('cmid') == null) {
+if (getQueryString('cmid') == null) {
   window.location.href = 'https://hovermint.com'
 }
 
