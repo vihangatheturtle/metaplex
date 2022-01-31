@@ -1,3 +1,5 @@
+import './CandyMachineAmount.css'
+
 export const MintAmount = () => {
     return (
       <div>
