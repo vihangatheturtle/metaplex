@@ -8,6 +8,7 @@ import { CandyMachineAccount } from './candy-machine';
 
 type HeaderProps = {
   candyMachine?: CandyMachineAccount;
+  onMint: () => Promise<void>;
 };
 
 export const Header = ({ candyMachine }: HeaderProps) => {
@@ -60,7 +61,7 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               ? 'PRESALE'
               : 'LIVE'
           }
-          cm={candyMachine}
+          onMint={props.onMint}
         />
       </Grid>
     </Grid>
