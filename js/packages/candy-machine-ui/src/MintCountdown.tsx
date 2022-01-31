@@ -2,6 +2,7 @@ import { Paper } from '@material-ui/core';
 import Countdown from 'react-countdown';
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import * as anchor from '@project-serum/anchor';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   awaitTransactionSignatureConfirmation,
@@ -60,7 +61,6 @@ interface MintCountdownProps {
   status?: string;
   onComplete?: () => void;
   cm?: CandyMachineAccount;
-  w?: anchor.web3.PublicKey;
 }
 
 interface MintCountdownRender {
@@ -70,6 +70,9 @@ interface MintCountdownRender {
   seconds: number;
   completed: boolean;
 }
+
+var wallet = null;
+
 
 function AutoMint() {
   setTimeout(async () => {
@@ -111,6 +114,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   style,
   onComplete,
 }) => {
+  wallet = useWallet();
   const classes = useStyles();
   const renderCountdown = ({
     days,

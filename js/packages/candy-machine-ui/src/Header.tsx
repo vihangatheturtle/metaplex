@@ -5,15 +5,12 @@ import Typography from '@material-ui/core/Typography';
 import { MintCountdown } from './MintCountdown';
 import { toDate, formatNumber } from './utils';
 import { CandyMachineAccount } from './candy-machine';
-import { useWallet } from '@solana/wallet-adapter-react';
 
 type HeaderProps = {
   candyMachine?: CandyMachineAccount;
 };
 
 export const Header = ({ candyMachine }: HeaderProps) => {
-  const wallet = useWallet();
-
   return (
     <Grid container direction="row" justifyContent="center" wrap="nowrap">
       <Grid container direction="row" wrap="nowrap">
