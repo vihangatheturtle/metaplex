@@ -23,6 +23,7 @@ import { GatewayProvider } from '@civic/solana-gateway-react';
 import { AutoMintCheckbox } from './AutoMint'
 import { MintAmount } from './CandyMintAmount';
 import { AppNote } from './AppNote';
+import { CMInput } from './cmInput';
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 100%;
@@ -215,6 +216,7 @@ const Home = (props: HomeProps) => {
                 )}
                 <AutoMintCheckbox />
                 <MintAmount />
+                <CMInput />
                 <AppNote
                   noteText={"The \"Mint Amount\" selector does not currently work"}
                 />
