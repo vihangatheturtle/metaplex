@@ -1,16 +1,7 @@
 import { Paper } from '@material-ui/core';
 import Countdown from 'react-countdown';
-import { useEffect, useMemo, useState, useCallback } from 'react';
-import * as anchor from '@project-serum/anchor';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import {
-  awaitTransactionSignatureConfirmation,
-  CandyMachineAccount,
-  CANDY_MACHINE_PROGRAM,
-  getCandyMachineState,
-  mintOneToken,
-} from './candy-machine';
+import { CandyMachineAccount } from './candy-machine';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
