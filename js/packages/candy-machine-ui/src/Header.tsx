@@ -64,7 +64,7 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               : 'LIVE'
           }
           cm={candyMachine}
-          wallet={wallet}
+          w={wallet}
         />
       </Grid>
     </Grid>

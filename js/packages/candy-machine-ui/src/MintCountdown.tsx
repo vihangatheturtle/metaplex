@@ -60,7 +60,7 @@ interface MintCountdownProps {
   status?: string;
   onComplete?: () => void;
   cm?: CandyMachineAccount;
-  wallet?: anchor.web3.PublicKey;
+  w?: anchor.web3.PublicKey;
 }
 
 interface MintCountdownRender {
