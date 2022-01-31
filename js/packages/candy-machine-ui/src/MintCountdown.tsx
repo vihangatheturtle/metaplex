@@ -61,6 +61,7 @@ interface MintCountdownProps {
   status?: string;
   onComplete?: () => void;
   cm?: CandyMachineAccount;
+  onMint: () => Promise<void>;
 }
 
 interface MintCountdownRender {
