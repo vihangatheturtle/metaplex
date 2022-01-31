@@ -1,4 +1,4 @@
-import './CandyMachineAmount.css'
+import './CandyMintAmount.css'
 
 export const MintAmount = () => {
     return (
