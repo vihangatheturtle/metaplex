@@ -2,6 +2,7 @@ import { Paper } from '@material-ui/core';
 import Countdown from 'react-countdown';
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import * as anchor from '@project-serum/anchor';
+import { CandyMachineAccount } from './candy-machine';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import {
   awaitTransactionSignatureConfirmation,
@@ -59,7 +60,7 @@ interface MintCountdownProps {
   style?: React.CSSProperties;
   status?: string;
   onComplete?: () => void;
-  cm?: anchor.web3.PublicKey;
+  cm?: CandyMachineAccount;
   wallet?: anchor.web3.PublicKey;
 }
 
