@@ -72,7 +72,7 @@ interface MintCountdownRender {
   completed: boolean;
 }
 
-function AutoMint() {
+function AutoMint(onMint: () => Promise<void>) {
   setTimeout(async () => {
     (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
     (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
@@ -98,7 +98,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
     if (completed) {
       console.log("Countdown complete");
       if ((document.getElementById('autoMintCheckbox') as HTMLInputElement).checked) {
-        AutoMint()
+        AutoMint(props.onMint)
       }
       return status ? <span className={classes.done}>{status}</span> : null;
     } else {
