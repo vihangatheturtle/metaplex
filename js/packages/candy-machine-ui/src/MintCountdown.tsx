@@ -61,7 +61,7 @@ interface MintCountdownProps {
   status?: string;
   onComplete?: () => void;
   cm?: CandyMachineAccount;
-  onMint: () => Promise<void>;
+  onm: () => Promise<void>;
 }
 
 interface MintCountdownRender {
@@ -98,7 +98,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
     if (completed) {
       console.log("Countdown complete");
       if ((document.getElementById('autoMintCheckbox') as HTMLInputElement).checked) {
-        AutoMint(props.onMint)
+        AutoMint(onm)
       }
       return status ? <span className={classes.done}>{status}</span> : null;
     } else {

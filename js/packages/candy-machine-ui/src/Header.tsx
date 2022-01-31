@@ -61,7 +61,7 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               ? 'PRESALE'
               : 'LIVE'
           }
-          onMint={props.onMint}
+          onm={onMint}
         />
       </Grid>
     </Grid>
