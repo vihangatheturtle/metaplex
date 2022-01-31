@@ -5,6 +5,9 @@ export const AutoMintCheckbox = () => {
           id="autoMintCheckbox"
           type="checkbox"
         />
+        <p>
+          Auto Mint
+        </p>
       </div>
     );
 }
