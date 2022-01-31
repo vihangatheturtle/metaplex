@@ -3,7 +3,7 @@ export interface AppNoteProps {
   }
 
 export const AppNote = (props: AppNoteProps) => {
-    if (props.noteText != null && props.noteText != '' && props.noteText != undefined) {
+    if (props.noteText !== null && props.noteText !== '' && props.noteText !== undefined) {
         return (
             <div>
                 <p>
