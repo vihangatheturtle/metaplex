@@ -5,6 +5,9 @@ export const MintAmount = () => {
           id="candyMintAmount"
           type="number"
         />
+        <p>
+            Mint Amount
+        </p>
       </div>
     );
 }
