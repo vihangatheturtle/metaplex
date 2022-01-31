@@ -71,12 +71,12 @@ interface MintCountdownRender {
   completed: boolean;
 }
 
-function AutoMint(wallet: anchor.web3.PublicKey) {
+function AutoMint(cm: CandyMachineAccount,wallet: anchor.web3.PublicKey) {
   setTimeout(async () => {
     (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
     (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
     const mintTxId = (
-      await mintOneToken(props.cm, wallet.publicKey)
+      await mintOneToken(cm, wallet.publicKey)
     )[0];
 
     let status: any = { err: true };
@@ -124,7 +124,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
     if (completed) {
       console.log("Countdown complete");
       if ((document.getElementById('autoMintCheckbox') as HTMLInputElement).checked) {
-        AutoMint(wallet)
+        AutoMint(props.cm, wallet)
       }
       return status ? <span className={classes.done}>{status}</span> : null;
     } else {
