@@ -85,6 +85,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   status,
   style,
   onComplete,
+  onm,
 }) => {
   const classes = useStyles();
   const renderCountdown = ({
