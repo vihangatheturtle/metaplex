@@ -215,7 +215,9 @@ const Home = (props: HomeProps) => {
                 )}
                 <AutoMintCheckbox />
                 <MintAmount />
-                <AppNote />
+                <AppNote
+                  noteText={"The \"Mint Amount\" selector does not currently work"}
+                />
               </MintContainer>
             </>
           )}
