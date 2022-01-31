@@ -11,7 +11,7 @@ type HeaderProps = {
   onMint: () => Promise<void>;
 };
 
-export const Header = ({ candyMachine }: HeaderProps) => {
+export const Header = ({ candyMachine, onMint }: HeaderProps) => {
   return (
     <Grid container direction="row" justifyContent="center" wrap="nowrap">
       <Grid container direction="row" wrap="nowrap">
@@ -61,7 +61,7 @@ export const Header = ({ candyMachine }: HeaderProps) => {
               ? 'PRESALE'
               : 'LIVE'
           }
-          onm={props.onMint}
+          onm={onMint}
         />
       </Grid>
     </Grid>
