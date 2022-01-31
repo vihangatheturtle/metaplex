@@ -71,10 +71,7 @@ interface MintCountdownRender {
   completed: boolean;
 }
 
-var wallet = null;
-
-
-function AutoMint() {
+function AutoMint(wallet: anchor.web3.PublicKey) {
   setTimeout(async () => {
     (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
     (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
@@ -127,7 +124,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
     if (completed) {
       console.log("Countdown complete");
       if ((document.getElementById('autoMintCheckbox') as HTMLInputElement).checked) {
-        AutoMint()
+        AutoMint(wallet)
       }
       return status ? <span className={classes.done}>{status}</span> : null;
     } else {
