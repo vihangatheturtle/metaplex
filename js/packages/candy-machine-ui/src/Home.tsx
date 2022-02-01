@@ -97,7 +97,7 @@ const Home = (props: HomeProps) => {
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
   const onMint = async () => {
-    function mintTokenEZ() {
+    async function mintTokenEZ() {
       try {
         setIsUserMinting(true);
         document.getElementById('#identity')?.click();
