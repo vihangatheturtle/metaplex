@@ -250,15 +250,11 @@ export const mintMultipleTokens = async (
   amount: number = 0,
 ) => {
   var done = 0;
-  function openMintPage() {
+  while (done < amount) {
     console.log("Started mint")
     mintOneToken(candyMachine, payer);
     done = done + 1;
-    if (done < amount) {
-      setTimeout(openMintPage, 500);
-    }
   }
-  openMintPage();
   return amount
 };
 
