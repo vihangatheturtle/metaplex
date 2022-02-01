@@ -161,6 +161,7 @@ const Home = (props: HomeProps) => {
         }
       } else if (amount > 1) {
         if (wallet.connected && candyMachine?.program && wallet.publicKey) {
+          setIsUserMinting(true);
           await mintMultipleTokens(candyMachine, wallet.publicKey, amount);
         }
       }
