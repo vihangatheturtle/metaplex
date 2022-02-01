@@ -259,8 +259,8 @@ export const mintMultipleTokens = async (
 };
 
 export const mintOneToken = async (
-  candyMachine: CandyMachineAccount,
-  payer: anchor.web3.PublicKey,
+  candyMachine?: CandyMachineAccount,
+  payer?: anchor.web3.PublicKey,
 ): Promise<(string | undefined)[]> => {
   const mint = anchor.web3.Keypair.generate();
 
