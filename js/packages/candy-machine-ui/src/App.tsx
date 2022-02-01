@@ -19,7 +19,10 @@ import {
 } from '@solana/wallet-adapter-react';
 import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui';
 
+import { CMInput } from './cmInput';
+
 import { ThemeProvider, createTheme } from '@material-ui/core';
+import { NavBar } from './NavBar';
 
 const URLSearchParams = window.URLSearchParams;
 
@@ -88,6 +91,7 @@ const App = () => {
       <ConnectionProvider endpoint={endpoint}>
         <WalletProvider wallets={wallets} autoConnect>
           <WalletDialogProvider>
+            <NavBar />
             <Home
               candyMachineId={candyMachineId}
               rawCandyMachineID={rawCandyMachineID}
@@ -96,6 +100,7 @@ const App = () => {
               txTimeout={txTimeoutInMilliseconds}
               rpcHost={rpcHost}
             />
+            <CMInput />
           </WalletDialogProvider>
         </WalletProvider>
       </ConnectionProvider>
