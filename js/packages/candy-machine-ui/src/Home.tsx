@@ -160,7 +160,9 @@ const Home = (props: HomeProps) => {
           setIsUserMinting(false);
         }
       } else if (amount > 1) {
-        await mintMultipleTokens(candyMachine, wallet.publicKey, amount);
+        if (wallet.connected && candyMachine?.program && wallet.publicKey) {
+          await mintMultipleTokens(candyMachine, wallet.publicKey, amount);
+        }
       }
     }
     mintTokenEZ(2)
