@@ -97,65 +97,69 @@ const Home = (props: HomeProps) => {
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
   const onMint = async () => {
-    try {
-      setIsUserMinting(true);
-      document.getElementById('#identity')?.click();
-      if (wallet.connected && candyMachine?.program && wallet.publicKey) {
-        const mintTxId = (
-          await mintOneToken(candyMachine, wallet.publicKey)
-        )[0];
+    function mintTokenEZ() {
+      try {
+        setIsUserMinting(true);
+        document.getElementById('#identity')?.click();
+        if (wallet.connected && candyMachine?.program && wallet.publicKey) {
+          const mintTxId = (
+            await mintOneToken(candyMachine, wallet.publicKey)
+          )[0];
 
-        let status: any = { err: true };
-        if (mintTxId) {
-          status = await awaitTransactionSignatureConfirmation(
-            mintTxId,
-            props.txTimeout,
-            props.connection,
-            true,
-          );
+          let status: any = { err: true };
+          if (mintTxId) {
+            status = await awaitTransactionSignatureConfirmation(
+              mintTxId,
+              props.txTimeout,
+              props.connection,
+              true,
+            );
+          }
+
+          if (status && !status.err) {
+            setAlertState({
+              open: true,
+              message: 'Congratulations! Mint succeeded!',
+              severity: 'success',
+            });
+          } else {
+            setAlertState({
+              open: true,
+              message: 'Mint failed! Please try again!',
+              severity: 'error',
+            });
+          }
         }
-
-        if (status && !status.err) {
-          setAlertState({
-            open: true,
-            message: 'Congratulations! Mint succeeded!',
-            severity: 'success',
-          });
+      } catch (error: any) {
+        let message = error.msg || 'Minting failed! Please try again!';
+        if (!error.msg) {
+          if (!error.message) {
+            message = 'Transaction Timeout! Please try again.';
+          } else if (error.message.indexOf('0x137')) {
+            message = `SOLD OUT!`;
+          } else if (error.message.indexOf('0x135')) {
+            message = `Insufficient funds to mint. Please fund your wallet.`;
+          }
         } else {
-          setAlertState({
-            open: true,
-            message: 'Mint failed! Please try again!',
-            severity: 'error',
-          });
+          if (error.code === 311) {
+            message = `SOLD OUT!`;
+            window.location.reload();
+          } else if (error.code === 312) {
+            message = `Minting period hasn't started yet.`;
+          }
         }
-      }
-    } catch (error: any) {
-      let message = error.msg || 'Minting failed! Please try again!';
-      if (!error.msg) {
-        if (!error.message) {
-          message = 'Transaction Timeout! Please try again.';
-        } else if (error.message.indexOf('0x137')) {
-          message = `SOLD OUT!`;
-        } else if (error.message.indexOf('0x135')) {
-          message = `Insufficient funds to mint. Please fund your wallet.`;
-        }
-      } else {
-        if (error.code === 311) {
-          message = `SOLD OUT!`;
-          window.location.reload();
-        } else if (error.code === 312) {
-          message = `Minting period hasn't started yet.`;
-        }
-      }
 
-      setAlertState({
-        open: true,
-        message,
-        severity: 'error',
-      });
-    } finally {
-      setIsUserMinting(false);
+        setAlertState({
+          open: true,
+          message,
+          severity: 'error',
+        });
+      } finally {
+        setIsUserMinting(false);
+      }
     }
+    mintTokenEZ()
+    mintTokenEZ()
   };
 
   useEffect(() => {
