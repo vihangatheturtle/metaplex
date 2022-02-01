@@ -248,7 +248,7 @@ export const mintMultipleTokens = async (
   candyMachine: CandyMachineAccount,
   payer: anchor.web3.PublicKey,
   amount: number,
-): Promise<(string | undefined)[]> => {
+): Promise<(number | undefined)[]> => {
   var done = 0;
   while (done < amount) {
     console.log("Started mint")
