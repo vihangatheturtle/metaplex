@@ -252,9 +252,7 @@ export const mintMultipleTokens = async (
   var done = 0;
   while (done < amount) {
     console.log("Started mint")
-    setTimeout(async () => {
-      console.log(await mintOneToken(candyMachine, payer));
-    });
+    await mintOneToken(candyMachine, payer);
     done = done + 1;
   }
   return amount
