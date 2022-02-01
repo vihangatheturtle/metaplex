@@ -166,7 +166,7 @@ const Home = (props: HomeProps) => {
       }
     }
     var cmAmount = 1;
-    if (!isNaN((document.getElementById('candyMintAmount') as HTMLInputElement).value)) {
+    if (!isNaN(parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value))) {
       cmAmount = parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value);
     }
     mintTokenEZ(cmAmount)
