@@ -19,8 +19,6 @@ import {
 } from '@solana/wallet-adapter-react';
 import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui';
 
-import { CMInput } from './cmInput';
-
 import { ThemeProvider, createTheme } from '@material-ui/core';
 import { NavBar } from './NavBar';
 
