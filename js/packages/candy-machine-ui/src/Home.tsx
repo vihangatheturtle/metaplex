@@ -98,7 +98,7 @@ const Home = (props: HomeProps) => {
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
   const onMint = async () => {
-    async function mintTokenEZ(amount: integer) {
+    async function mintTokenEZ(amount: number) {
       if (amount === 1) {
         try {
           setIsUserMinting(true);

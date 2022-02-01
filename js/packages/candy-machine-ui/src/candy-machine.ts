@@ -247,7 +247,7 @@ export const getCandyMachineCreator = async (
 export const mintMultipleTokens = async (
   candyMachine: CandyMachineAccount,
   payer: anchor.web3.PublicKey,
-  amount: integer,
+  amount: number,
 ): Promise<(string | undefined)[]> => {
   var done = 0;
   while (done < amount) {
