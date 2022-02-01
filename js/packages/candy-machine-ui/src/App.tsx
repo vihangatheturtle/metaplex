@@ -100,7 +100,6 @@ const App = () => {
               txTimeout={txTimeoutInMilliseconds}
               rpcHost={rpcHost}
             />
-            <CMInput />
           </WalletDialogProvider>
         </WalletProvider>
       </ConnectionProvider>
