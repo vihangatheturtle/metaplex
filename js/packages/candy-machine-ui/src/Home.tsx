@@ -162,31 +162,7 @@ const Home = (props: HomeProps) => {
       } else if (amount > 1) {
         if (wallet.connected && candyMachine?.program && wallet.publicKey) {
           setIsUserMinting(true);
-          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, async (mintTxId?: string[]) => {
-            let status: any = { err: true };
-            if (mintTxId) {
-              status = await awaitTransactionSignatureConfirmation(
-                mintTxId,
-                props.txTimeout,
-                props.connection,
-                true,
-              );
-            }
-
-            if (status && !status.err) {
-              setAlertState({
-                open: true,
-                message: 'Congratulations! Mint succeeded!',
-                severity: 'success',
-              });
-            } else {
-              setAlertState({
-                open: true,
-                message: 'Mint failed! Please try again!',
-                severity: 'error',
-              });
-            }
-          });
+          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, setAlertState);
           setIsUserMinting(false);
         }
       }
