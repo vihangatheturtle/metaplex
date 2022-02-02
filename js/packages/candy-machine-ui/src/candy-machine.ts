@@ -256,9 +256,9 @@ export const mintMultipleTokens = async (
     var txid = await mintOneToken(candyMachine, payer);
     if (mintCB) {
       let status: any = { err: true };
-      if (mintTxId) {
+      if (txid) {
         status = await awaitTransactionSignatureConfirmation(
-          mintTxId,
+          txid,
           props.txTimeout,
           props.connection,
           true,
