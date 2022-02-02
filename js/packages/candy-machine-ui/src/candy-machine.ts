@@ -253,7 +253,7 @@ export const mintMultipleTokens = async (
   var done = 0;
   while (done < amount) {
     console.log("Started mint")
-    var txid = await mintOneToken(candyMachine, payer)!;
+    var txid = await mintOneToken(candyMachine, payer)[0];
     if (mintCB) {
       let status: any = { err: true };
       if (txid) {
