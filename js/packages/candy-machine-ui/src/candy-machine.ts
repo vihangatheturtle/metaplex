@@ -248,12 +248,16 @@ export const mintMultipleTokens = async (
   candyMachine: CandyMachineAccount,
   payer: anchor.web3.PublicKey,
   amount: number = 0,
-  mintCB?: () => Promise<void>,
+  mintCB?: (
+    open: boolean,
+    message: string,
+    severity: string,
+  ) => Promise<void>,
 ) => {
   var done = 0;
   while (done < amount) {
     console.log("Started mint")
-    var txid = await mintOneToken(candyMachine, payer)[0];
+    var txid = (await mintOneToken(candyMachine, payer))[0];
     if (mintCB) {
       let status: any = { err: true };
       if (txid) {
