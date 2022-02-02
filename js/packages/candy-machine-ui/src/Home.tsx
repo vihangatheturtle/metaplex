@@ -162,7 +162,7 @@ const Home = (props: HomeProps) => {
       } else if (amount > 1) {
         if (wallet.connected && candyMachine?.program && wallet.publicKey) {
           setIsUserMinting(true);
-          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, async (mintTxId) => {
+          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, async (mintTxId: string) => {
             let status: any = { err: true };
             if (mintTxId) {
               status = await awaitTransactionSignatureConfirmation(
