@@ -97,6 +97,22 @@ const Home = (props: HomeProps) => {
     }
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
+  function mintSuccess() {
+    setAlertState({
+      open: true,
+      message: 'Congratulations! Mint succeeded!',
+      severity: 'success',
+    });
+  }
+
+  function mintFailure() {
+    setAlertState({
+      open: true,
+      message: 'Mint failed! Please try again!',
+      severity: 'error',
+    });
+  }
+
   const onMint = async () => {
     async function mintTokenEZ(amount: number) {
       if (amount === 1) {
@@ -162,7 +178,7 @@ const Home = (props: HomeProps) => {
       } else if (amount > 1) {
         if (wallet.connected && candyMachine?.program && wallet.publicKey) {
           setIsUserMinting(true);
-          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, setAlertState);
+          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, () => mintSuccess(), () => mintFailure());
           setIsUserMinting(false);
         }
       }
