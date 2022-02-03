@@ -177,9 +177,7 @@ const Home = (props: HomeProps) => {
         }
       } else if (amount > 1) {
         if (wallet.connected && candyMachine?.program && wallet.publicKey) {
-          setIsUserMinting(true);
-          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, () => mintSuccess(), () => mintFailure());
-          setIsUserMinting(false);
+          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, props.txTimeout, props.connection, mintSuccess, mintFailure);
         }
       }
     }

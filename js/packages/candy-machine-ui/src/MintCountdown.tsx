@@ -89,9 +89,13 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
     hours += days * 24;
     if (completed) {
       console.log("Countdown complete");
-      if ((document.getElementById('autoMintCheckbox') as HTMLInputElement).checked) {
-        AutoMint(onm)
-      }
+      try {
+        if ((document.getElementById('autoMintCheckbox') as HTMLInputElement).checked) {
+          (document.getElementById('autoMintCheckbox') as HTMLInputElement).checked = false;
+          (document.getElementById('autoMintCheckbox') as HTMLInputElement).remove();
+          AutoMint(onm)
+        }
+      } catch { }
       return status ? <span className={classes.done}>{status}</span> : null;
     } else {
       return (

@@ -248,11 +248,13 @@ export const mintMultipleTokens = async (
   candyMachine: CandyMachineAccount,
   payer: anchor.web3.PublicKey,
   amount: number = 0,
-  mintCBS?: () => Promise<void>,
-  mintCBF?: () => Promise<void>,
+  txTimeout: number = 30000,
+  connection: anchor.web3.Connection,
+  mintCBS?: () => void,
+  mintCBF?: () => void,
 ) => {
   var done = 0;
-  while (done < amount) {
+  async function nextMint() {
     console.log("Started mint")
     var txid = (await mintOneToken(candyMachine, payer))[0];
     if (mintCBS && mintCBF) {
@@ -260,8 +262,8 @@ export const mintMultipleTokens = async (
       if (txid) {
         status = await awaitTransactionSignatureConfirmation(
           txid,
-          props.txTimeout,
-          props.connection,
+          txTimeout,
+          connection,
           true,
         );
       }
@@ -273,7 +275,11 @@ export const mintMultipleTokens = async (
         mintCBF();
       }
     }
-    done = done + 1;
+    done++;
+  }
+  while (done < amount) {
+    nextMint();
+    done++;
   }
   return amount
 };
