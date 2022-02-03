@@ -248,7 +248,7 @@ const Home = (props: HomeProps) => {
                 <MintAmount />
                 <CMInput />
                 <AppNote
-                  noteText={"The \"Mint Amount\" selector does not currently work"}
+                  noteText={""}
                 />
               </MintContainer>
             </>
