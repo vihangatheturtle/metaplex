@@ -26,10 +26,11 @@ import { Center } from '@chakra-ui/react'
 const URLSearchParams = window.URLSearchParams;
 
 const chakraTheme = extendTheme({
+  colors: {
   all: {
-    100:"#d554f6",
     500:"#d554f6"
   }
+}
 })
 
 const theme = createTheme({

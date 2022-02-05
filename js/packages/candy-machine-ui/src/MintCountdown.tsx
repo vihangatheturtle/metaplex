@@ -2,6 +2,7 @@ import { Paper } from '@material-ui/core';
 import Countdown from 'react-countdown';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CandyMachineAccount } from './candy-machine';
+import {Box, Center, Flex, HStack, Spacer, Text, Stack, Switch} from '@chakra-ui/react'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -52,7 +53,8 @@ interface MintCountdownProps {
   status?: string;
   onComplete?: () => void;
   cm?: CandyMachineAccount;
-  onm: () => Promise<void>;
+  onm: () => Promise<boolean>;
+  autoMint: boolean;
 }
 
 interface MintCountdownRender {
@@ -63,11 +65,13 @@ interface MintCountdownRender {
   completed: boolean;
 }
 
-function AutoMint(onMint: () => Promise<void>) {
+function AutoMint(onMint: () => Promise<boolean>) {
   setTimeout(async () => {
-    (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
-    (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
-    await onMint();
+     const check: boolean = await onMint();
+     if (check) {
+      (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
+      (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
+     }
   }, 2000);
 }
 
@@ -77,6 +81,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   style,
   onComplete,
   onm,
+  autoMint,
 }) => {
   const classes = useStyles();
   const renderCountdown = ({
@@ -90,35 +95,29 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
     if (completed) {
       console.log("Countdown complete");
       try {
-        if ((document.getElementById('autoMintCheckbox') as HTMLInputElement).checked) {
-          (document.getElementById('autoMintCheckbox') as HTMLInputElement).checked = false;
-          (document.getElementById('autoMintCheckbox') as HTMLInputElement).remove();
+        if (autoMint) {
           AutoMint(onm)
         }
       } catch { }
-      return status ? <span className={classes.done}>{status}</span> : null;
+      return status ? (
+        <Stack spacing={"-8px"} paddingTop="2px">
+          <Flex>
+            <Spacer/>
+          <Text fontSize="12px" paddingTop="2px" fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
+            COUNTDDOWN
+          </Text>
+        </Flex>
+        <Text fontSize="30px" paddingTop="2px" fontWeight="bold" fontFamily={"Inter"} color="white">
+          Completed
+        </Text>
+      </Stack>) : null;
     } else {
       return (
-        <div className={classes.root} style={style}>
-          <Paper elevation={0}>
-            <span className={classes.item}>
-              {hours < 10 ? `0${hours}` : hours}
-            </span>
-            <span>hrs</span>
-          </Paper>
-          <Paper elevation={0}>
-            <span className={classes.item}>
-              {minutes < 10 ? `0${minutes}` : minutes}
-            </span>
-            <span>mins</span>
-          </Paper>
-          <Paper elevation={0}>
-            <span className={classes.item}>
-              {seconds < 10 ? `0${seconds}` : seconds}
-            </span>
-            <span>secs</span>
-          </Paper>
-        </div>
+        <Box>
+            <Text fontSize="lg" fontWeight="bold" fontFamily={"Inter"} color="white">
+            {hours < 10 ? `0${hours}` : hours}:{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+            </Text>
+        </Box>
       );
     }
   };
@@ -132,6 +131,29 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
       />
     );
   } else {
-    return null;
+    return <span>Lodaing..</span>;
   }
+
 };
+
+//<div className={classes.root} style={style}>
+//<Paper elevation={0}>
+//  <span className={classes.item}>
+//    {hours < 10 ? `0${hours}` : hours}
+//  </span>
+//  <span>hrs</span>
+//</Paper>
+//<Paper elevation={0}>
+//  <span className={classes.item}>
+//    {minutes < 10 ? `0${minutes}` : minutes}
+//  </span>
+//  <span>mins</span>
+//</Paper>
+//<Paper elevation={0}>
+//  <span className={classes.item}>
+//    {seconds < 10 ? `0${seconds}` : seconds}
+//  </span>
+//  <span>secs</span>
+//</Paper>
+//</div>
+

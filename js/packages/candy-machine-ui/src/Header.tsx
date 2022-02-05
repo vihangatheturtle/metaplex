@@ -5,56 +5,48 @@ import Typography from '@material-ui/core/Typography';
 import { MintCountdown } from './MintCountdown';
 import { toDate, formatNumber } from './utils';
 import { CandyMachineAccount } from './candy-machine';
+import {Box, Center, Flex, HStack, Spacer, Text, Stack, Switch} from '@chakra-ui/react'
 
 type HeaderProps = {
   candyMachine?: CandyMachineAccount;
-  onMint: () => Promise<void>;
+  onMint: () => Promise<boolean>;
+  autoMint: boolean;
 };
 
-export const Header = ({ candyMachine, onMint }: HeaderProps) => {
+export const Header = ({ candyMachine, onMint, autoMint }: HeaderProps) => {
 
   const getType = () => {
 
       if (candyMachine?.state.isPresale) {
-          return 'PRESALE';
+          return 'Presale';
       }
 
-      return 'ACTIVE';
+      return 'Live';
   }
 
   return (
-    <Grid container direction="row" justifyContent="center" wrap="nowrap">
-      <Grid container direction="row" wrap="nowrap">
+    <Flex>
         {candyMachine && (
-          <Grid container direction="row" wrap="nowrap">
-            <Grid container direction="column">
-              <Typography variant="body2" color="textSecondary">
-                Type
-              </Typography>
-              <Typography
-                color="textPrimary"
-                style={{
-                  fontWeight: 'bold',
-                  fontSize:"18px"
-                }}
-              >
-                {`${getType()}`}
-              </Typography>
-            </Grid>
-            <Grid container direction="column">
-              <Typography variant="body2" color="textSecondary">
-                Price
-              </Typography>
-              <Typography
-                color="textPrimary"
-                style={{ fontWeight: 'bold',
-                fontSize:"18px" }}
-              >
+            <HStack spacing="41px">
+            <Stack spacing={"8px"}>
+              <Text fontSize="12px" fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
+                TYPE
+              </Text>
+              <Text fontSize="18px" fontWeight="500" fontFamily={"Inter"} color="white">
+                {getType()}
+              </Text>
+            </Stack>
+            <Stack spacing={"8px"}>
+              <Text fontSize="12px" fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
+                PRICE
+              </Text>
+              <Text fontSize="18px" fontWeight="500" fontFamily={"Inter"} color="white">
                 {getMintPrice(candyMachine)}
-              </Typography>
-            </Grid>
-          </Grid>
+              </Text>
+            </Stack>
+            </HStack>
         )}
+        <Spacer/>
         <MintCountdown
           date={toDate(
             candyMachine?.state.goLiveDate
@@ -72,9 +64,9 @@ export const Header = ({ candyMachine, onMint }: HeaderProps) => {
               : 'LIVE'
           }
           onm={onMint}
+          autoMint={autoMint}
         />
-      </Grid>
-    </Grid>
+</Flex>
   );
 };
 
@@ -86,3 +78,31 @@ const getMintPrice = (candyMachine: CandyMachineAccount): string => {
   );
   return `◎ ${price}`;
 };
+//<Grid container direction="row" wrap="nowrap">
+//<Grid container direction="column">
+//  <Typography variant="body2" color="textSecondary">
+//    Type
+//  </Typography>
+//  <Typography
+//    color="textPrimary"
+//    style={{
+//      fontWeight: 'bold',
+//      fontSize:"18px"
+//    }}
+//  >
+//    {`${getType()}`}
+//  </Typography>
+//</Grid>
+//<Grid container direction="column">
+//  <Typography variant="body2" color="textSecondary">
+//    Price
+//  </Typography>
+//  <Typography
+//    color="textPrimary"
+//    style={{ fontWeight: 'bold',
+//    fontSize:"18px" }}
+//  >
+//    {getMintPrice(candyMachine)}
+//  </Typography>
+//</Grid>
+//</Grid>
