@@ -1,5 +1,9 @@
-#NB-topBar {
-    height: 64px;
+#navbar {
+    position: absolute;
     width: 100%;
-    background-color: #181818;
+    left: 0;
+}
+
+#logoutBtn:hover {
+    cursor: pointer;
 }
