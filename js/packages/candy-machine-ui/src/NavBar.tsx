@@ -1,5 +1,5 @@
 import './NavBar.css'
-import {Box, Center, Flex, HStack, Spacer, Text} from '@chakra-ui/react'
+import {Box, Flex, HStack, Spacer, Text} from '@chakra-ui/react'
 import Logo from "./img/logo.png"
 
 export const NavBar = () => {

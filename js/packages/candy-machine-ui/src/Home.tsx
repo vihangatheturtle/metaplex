@@ -3,8 +3,7 @@ import * as anchor from '@project-serum/anchor';
 
 import './Home.css';
 import styled from 'styled-components';
-import { Container, Snackbar } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
+import { Snackbar } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { PublicKey } from '@solana/web3.js';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -20,10 +19,12 @@ import { AlertState } from './utils';
 import { Header } from './Header';
 import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
+/*
 import { AutoMintCheckbox } from './AutoMint'
 import { MintAmount } from './CandyMintAmount';
 import { AppNote } from './AppNote';
 import { CMInput } from './cmInput';
+*/ // ADD LATER
 import { mintMultipleTokens } from './candy-machine';
 import {Box, Center, Flex, HStack, Spacer, Text, Stack, Switch} from '@chakra-ui/react'
 
@@ -39,7 +40,7 @@ const ConnectButton = styled(WalletDialogButton)`
   border: 1px solid black;
 `;
 
-const MintContainer = styled.div``; // add your owns styles here
+//const MintContainer = styled.div``; // add your owns styles here
 
 export interface HomeProps {
   candyMachineId?: anchor.web3.PublicKey;
@@ -67,7 +68,7 @@ const Home = (props: HomeProps) => {
     if (props.rawCandyMachineID) {
       setCmid(props.rawCandyMachineID)
     }
-  })
+  }, [props.rawCandyMachineID]);
 
   const anchorWallet = useMemo(() => {
     if (

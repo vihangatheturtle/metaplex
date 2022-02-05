@@ -22,7 +22,7 @@ import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui';
 import { ThemeProvider, createTheme } from '@material-ui/core';
 import { NavBar } from './NavBar';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
-import {Box, Center, Flex, HStack, Spacer, Text} from '@chakra-ui/react'
+import {Center} from '@chakra-ui/react'
 
 const URLSearchParams = window.URLSearchParams;
 
