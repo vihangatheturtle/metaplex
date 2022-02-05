@@ -21,9 +21,17 @@ import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui';
 
 import { ThemeProvider, createTheme } from '@material-ui/core';
 import { NavBar } from './NavBar';
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import {Box, Center, Flex, HStack, Spacer, Text} from '@chakra-ui/react'
 
 const URLSearchParams = window.URLSearchParams;
+
+const chakraTheme = extendTheme({
+  all: {
+    100:"#d554f6",
+    500:"#d554f6"
+  }
+})
 
 const theme = createTheme({
   palette: {
@@ -86,12 +94,13 @@ const App = () => {
   );
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={chakraTheme}>
       <ThemeProvider theme={theme}>
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
             <WalletDialogProvider>
               <NavBar />
+              <Center>
               <Home
                 candyMachineId={candyMachineId}
                 rawCandyMachineID={rawCandyMachineID}
@@ -100,6 +109,7 @@ const App = () => {
                 txTimeout={txTimeoutInMilliseconds}
                 rpcHost={rpcHost}
               />
+              </Center>
             </WalletDialogProvider>
           </WalletProvider>
         </ConnectionProvider>

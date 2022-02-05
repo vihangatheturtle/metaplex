@@ -12,6 +12,16 @@ type HeaderProps = {
 };
 
 export const Header = ({ candyMachine, onMint }: HeaderProps) => {
+
+  const getType = () => {
+
+      if (candyMachine?.state.isPresale) {
+          return 'PRESALE';
+      }
+
+      return 'ACTIVE';
+  }
+
   return (
     <Grid container direction="row" justifyContent="center" wrap="nowrap">
       <Grid container direction="row" wrap="nowrap">
@@ -19,16 +29,16 @@ export const Header = ({ candyMachine, onMint }: HeaderProps) => {
           <Grid container direction="row" wrap="nowrap">
             <Grid container direction="column">
               <Typography variant="body2" color="textSecondary">
-                Remaining
+                Type
               </Typography>
               <Typography
-                variant="h6"
                 color="textPrimary"
                 style={{
                   fontWeight: 'bold',
+                  fontSize:"18px"
                 }}
               >
-                {`${candyMachine?.state.itemsRemaining}`}
+                {`${getType()}`}
               </Typography>
             </Grid>
             <Grid container direction="column">
@@ -36,9 +46,9 @@ export const Header = ({ candyMachine, onMint }: HeaderProps) => {
                 Price
               </Typography>
               <Typography
-                variant="h6"
                 color="textPrimary"
-                style={{ fontWeight: 'bold' }}
+                style={{ fontWeight: 'bold',
+                fontSize:"18px" }}
               >
                 {getMintPrice(candyMachine)}
               </Typography>

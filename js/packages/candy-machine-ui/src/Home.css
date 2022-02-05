@@ -1,3 +1,15 @@
 .cmid {
     color: white;
 }
+
+.cmidInput {
+    width: 360px;
+    height: 35px;
+    background-color: #2f2f2f;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    padding-left: 5px;
+}

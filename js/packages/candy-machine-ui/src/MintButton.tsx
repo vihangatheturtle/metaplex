@@ -6,11 +6,11 @@ import { GatewayStatus, useGateway } from '@civic/solana-gateway-react';
 import { useEffect, useState } from 'react';
 
 export const CTAButton = styled(Button)`
-  width: 100%;
-  height: 60px;
+  width: 360px;
+  height: 50px;
   margin-top: 10px;
   margin-bottom: 5px;
-  background: linear-gradient(180deg, #604ae5 0%, #813eee 100%);
+  background: linear-gradient(180deg, #e682ff 0%, #db4dff 100%);
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -46,7 +46,7 @@ export const MintButton = ({
       return <CircularProgress />;
     }
 
-    return 'MINT';
+    return 'Start Minting';
   };
 
   return (
