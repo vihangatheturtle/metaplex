@@ -21,6 +21,7 @@ import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui';
 
 import { ThemeProvider, createTheme } from '@material-ui/core';
 import { NavBar } from './NavBar';
+import { ChakraProvider } from '@chakra-ui/react'
 
 const URLSearchParams = window.URLSearchParams;
 
@@ -85,23 +86,25 @@ const App = () => {
   );
 
   return (
-    <ThemeProvider theme={theme}>
-      <ConnectionProvider endpoint={endpoint}>
-        <WalletProvider wallets={wallets} autoConnect>
-          <WalletDialogProvider>
-            <NavBar />
-            <Home
-              candyMachineId={candyMachineId}
-              rawCandyMachineID={rawCandyMachineID}
-              connection={connection}
-              startDate={startDateSeed}
-              txTimeout={txTimeoutInMilliseconds}
-              rpcHost={rpcHost}
-            />
-          </WalletDialogProvider>
-        </WalletProvider>
-      </ConnectionProvider>
-    </ThemeProvider>
+    <ChakraProvider>
+      <ThemeProvider theme={theme}>
+        <ConnectionProvider endpoint={endpoint}>
+          <WalletProvider wallets={wallets} autoConnect>
+            <WalletDialogProvider>
+              <NavBar />
+              <Home
+                candyMachineId={candyMachineId}
+                rawCandyMachineID={rawCandyMachineID}
+                connection={connection}
+                startDate={startDateSeed}
+                txTimeout={txTimeoutInMilliseconds}
+                rpcHost={rpcHost}
+              />
+            </WalletDialogProvider>
+          </WalletProvider>
+        </ConnectionProvider>
+      </ThemeProvider>
+    </ChakraProvider>
   );
 };
 
