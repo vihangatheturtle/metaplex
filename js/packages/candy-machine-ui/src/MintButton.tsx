@@ -4,7 +4,7 @@ import { CandyMachineAccount } from './candy-machine';
 import { CircularProgress } from '@material-ui/core';
 import { GatewayStatus, useGateway } from '@civic/solana-gateway-react';
 import { useEffect, useState } from 'react';
-import './MintButton.css';
+
 
 export const CTAButton = styled(Button)`
   width: 360px;
