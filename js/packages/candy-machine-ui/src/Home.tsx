@@ -140,7 +140,7 @@ const Home = (props: HomeProps) => {
   }
 
   const onMint = async () => {
-    if (candyMachine?.state?.isActive || candyMachine?.state?.isSoldOut)
+    if (candyMachine?.state?.isSoldOut)
       return false;
     async function mintTokenEZ(amount: number) {
       if (amount === 1) {

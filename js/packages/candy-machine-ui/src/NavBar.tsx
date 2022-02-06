@@ -11,7 +11,7 @@ export const NavBar = (props: NavBarProps) => {
 
   if (props.walletAddress !== '') {
     walletAddressShort = props.walletAddress[0] + props.walletAddress[1] + props.walletAddress[2] + props.walletAddress[3] + "..." + props.walletAddress[props.walletAddress.length - 4] + props.walletAddress[props.walletAddress.length - 3] + props.walletAddress[props.walletAddress.length - 2] + props.walletAddress[props.walletAddress.length - 1];
-    (document.getElementById('Avatar') as HTMLInputElement).src = `https://avatars.dicebear.com/api/bottts/${props.walletAddress}.svg`;
+    (document.getElementById('Avatar') as HTMLInputElement).src = `https://avatars.dicebear.com/api/adventurer-neutral/${props.walletAddress}.svg?scale=90`;
   }
 
   function logoutClick() {
