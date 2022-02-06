@@ -131,7 +131,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
       />
     );
   } else {
-    return <span>Lodaing..</span>;
+    return <span>Loading..</span>;
   }
 
 };
