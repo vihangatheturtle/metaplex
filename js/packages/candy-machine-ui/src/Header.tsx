@@ -1,11 +1,11 @@
 import * as anchor from '@project-serum/anchor';
 
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+//import Grid from '@material-ui/core/Grid';
+//import Typography from '@material-ui/core/Typography';
 import { MintCountdown } from './MintCountdown';
 import { toDate, formatNumber } from './utils';
 import { CandyMachineAccount } from './candy-machine';
-import {Box, Center, Flex, HStack, Spacer, Text, Stack, Switch} from '@chakra-ui/react'
+import { Flex, HStack, Spacer, Text, Stack } from '@chakra-ui/react'
 
 type HeaderProps = {
   candyMachine?: CandyMachineAccount;

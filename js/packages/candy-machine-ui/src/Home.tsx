@@ -20,6 +20,7 @@ import { Header } from './Header';
 import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
 import { createBrowserHistory } from 'history';
+import { verifyKey } from './HyperAuth';
 /*
 import { AutoMintCheckbox } from './AutoMint'
 import { MintAmount } from './CandyMintAmount';
@@ -29,6 +30,48 @@ import { CMInput } from './cmInput';
 import { NavBar } from './NavBar';
 import { mintMultipleTokens } from './candy-machine';
 import { Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip,  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
+
+async function auth() {
+  async function startAuth(key: string) {
+    var res = await verifyKey(key)
+
+    if (res !== true) {
+      console.log("Invalid license key");
+      localStorage.removeItem('license');
+      document.body.remove();
+      alert("Please refresh the page and use a valid license key");
+    } else {
+      console.log("Valid license key");
+      document.body.style.display = 'block';
+      document.body.style.opacity = "1";
+    }
+  }
+
+  async function main() {
+    var savedKey = localStorage.getItem('license');
+
+    if (savedKey !== null && savedKey !== '' && savedKey !== undefined) {
+      console.log("Found saved license");
+      startAuth(savedKey);
+    } else {
+      console.log("No license found");
+      var key = window.prompt('Enter your license key');
+      if (key !== null && key !== '') {
+        localStorage.setItem('license', key);
+        startAuth(key);
+      } else {
+        console.log("Invalid license key");
+        localStorage.removeItem('license');
+        document.body.remove();
+        alert("Please refresh the page and use a valid license key");
+      }
+    }
+  }
+
+  main();
+}
+
+auth();
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 360px;
@@ -62,7 +105,7 @@ const Home = (props: HomeProps) => {
     severity: undefined,
   });
   const [currentCmid, setCmid] = useState("")
-  const [isAutoMinting, setIsAutoMinting] = useState(false)
+  const [isAutoMinting] = useState(false)
   const [mintAmount, setMintAmount] = useState(1)
 
   const rpcUrl = props.rpcHost;
@@ -75,7 +118,9 @@ const Home = (props: HomeProps) => {
   }, [props.rawCandyMachineID]);
 
   const isAutoMint = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setIsAutoMinting(event.target.checked)
+      alert("Automint is not fully implemented, it will be available soon!")
+      //setIsAutoMinting(event.target.checked)
+      event.target.checked = false;
   }
 
   const anchorWallet = useMemo(() => {
@@ -268,7 +313,7 @@ const Home = (props: HomeProps) => {
                       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.0094 2.99061C11.6875 1.66874 9.54849 1.66874 8.22817 2.99061L6.71411 4.50468L7.51099 5.30155L9.02505 3.78749C9.86567 2.94686 11.2844 2.8578 12.2125 3.78749C13.1422 4.71718 13.0532 6.13436 12.2125 6.97499L10.6985 8.48905L11.4969 9.28749L13.011 7.77343C14.3297 6.45155 14.3297 4.31249 13.0094 2.99061V2.99061ZM6.97661 12.2125C6.13599 13.0531 4.71724 13.1422 3.78911 12.2125C2.85942 11.2828 2.94849 9.86561 3.78911 9.02499L5.30317 7.51093L4.50474 6.71249L2.99067 8.22655C1.6688 9.54843 1.6688 11.6875 2.99067 13.0078C4.31255 14.3281 6.45161 14.3297 7.77192 13.0078L9.28599 11.4937L8.48911 10.6969L6.97661 12.2125V12.2125ZM4.06724 3.27186C4.04374 3.2486 4.01202 3.23555 3.97896 3.23555C3.94589 3.23555 3.91417 3.2486 3.89067 3.27186L3.27192 3.89061C3.24866 3.91411 3.23561 3.94583 3.23561 3.97889C3.23561 4.01196 3.24866 4.04368 3.27192 4.06718L11.9344 12.7297C11.9829 12.7781 12.0625 12.7781 12.111 12.7297L12.7297 12.1109C12.7782 12.0625 12.7782 11.9828 12.7297 11.9344L4.06724 3.27186Z" fill="#a9a9a9"/>
                       </svg>
-                      <button onClick={() => {window.localStorage.walletName = "";window.location.reload();}}>
+                      <button onClick={() => {window.localStorage.walletName = "";localStorage.removeItem('license');window.location.reload();}}>
                       <Text paddingTop="1px" fontSize="12px" fontFamily="Inter" color="#a9a9a9">
                         DISCONNECT
                       </Text>

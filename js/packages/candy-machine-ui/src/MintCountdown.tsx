@@ -1,8 +1,8 @@
-import { Paper } from '@material-ui/core';
+//import { Paper } from '@material-ui/core';
 import Countdown from 'react-countdown';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CandyMachineAccount } from './candy-machine';
-import {Box, Center, Flex, HStack, Spacer, Text, Stack, Switch} from '@chakra-ui/react'
+import {Box, Flex, Spacer, Text, Stack} from '@chakra-ui/react'
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -83,7 +83,8 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   onm,
   autoMint,
 }) => {
-  const classes = useStyles();
+  //const classes = useStyles();
+  useStyles();
   const renderCountdown = ({
     days,
     hours,

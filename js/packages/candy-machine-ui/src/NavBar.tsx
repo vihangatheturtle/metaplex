@@ -16,6 +16,7 @@ export const NavBar = (props: NavBarProps) => {
 
   function logoutClick() {
     window.localStorage.walletName = "";
+    localStorage.removeItem('license');
     window.location.reload();
   }
 
