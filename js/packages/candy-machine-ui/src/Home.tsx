@@ -134,9 +134,17 @@ const Home = (props: HomeProps) => {
 
   const handleCmidInutKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      const history = createBrowserHistory();
-      history.push(`/?cmid=${currentCmid}`);
-      window.location.reload();
+      if (currentCmid.length === 44) {
+        const history = createBrowserHistory();
+        history.push(`/?cmid=${currentCmid}`);
+        window.location.reload();
+      } else {
+        setAlertState({
+          open: true,
+          message: 'Please enter a valid CMID',
+          severity: 'error',
+        });
+      }
     }
   }
 
