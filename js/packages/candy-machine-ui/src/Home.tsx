@@ -28,7 +28,7 @@ import { CMInput } from './cmInput';
 */ // ADD LATER
 import { NavBar } from './NavBar';
 import { mintMultipleTokens } from './candy-machine';
-import {Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip} from '@chakra-ui/react'
+import { Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip,  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 360px;
@@ -289,7 +289,7 @@ const Home = (props: HomeProps) => {
                   </Stack>
                 </Center>
               </Box>
-              <Box h="180px" w="400px" bg="#1E1E1E" border="1px" borderColor={"#313131"} paddingTop="12px">
+              <Box h="220px" w="400px" bg="#1E1E1E" border="1px" borderColor={"#313131"} paddingTop="12px">
                 <Center>
                   <Stack>
                     <Flex>
@@ -341,7 +341,13 @@ const Home = (props: HomeProps) => {
                           </svg>
                         </Tooltip>
                       </Flex>
-
+                      <NumberInput defaultValue={1} min={1} max={20} allowMouseWheel>
+                        <NumberInputField bg="#2f2f2f" color="white" />
+                        <NumberInputStepper>
+                          <NumberIncrementStepper color="white" />
+                          <NumberDecrementStepper color="white"/>
+                        </NumberInputStepper>
+                      </NumberInput>
                     </Stack>
                   </Stack>
                 </Center>
