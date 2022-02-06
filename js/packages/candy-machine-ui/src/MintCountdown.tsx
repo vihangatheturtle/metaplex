@@ -83,7 +83,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   onm,
   autoMint,
 }) => {
-  //const classes = useStyles();
+  //const classes = useStyles(); idk why this is here
   useStyles();
   const renderCountdown = ({
     days,
