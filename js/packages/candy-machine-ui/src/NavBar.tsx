@@ -10,7 +10,8 @@ export const NavBar = (props: NavBarProps) => {
   var walletAddressShort = 'Connect Wallet'
 
   if (props.walletAddress !== '') {
-    walletAddressShort = props.walletAddress[0] + props.walletAddress[1] + props.walletAddress[2] + props.walletAddress[3] + "..." + props.walletAddress[props.walletAddress.length - 4] + props.walletAddress[props.walletAddress.length - 3] + props.walletAddress[props.walletAddress.length - 2] + props.walletAddress[props.walletAddress.length - 1]
+    walletAddressShort = props.walletAddress[0] + props.walletAddress[1] + props.walletAddress[2] + props.walletAddress[3] + "..." + props.walletAddress[props.walletAddress.length - 4] + props.walletAddress[props.walletAddress.length - 3] + props.walletAddress[props.walletAddress.length - 2] + props.walletAddress[props.walletAddress.length - 1];
+    (document.getElementById('Avatar') as HTMLInputElement).src = `https://avatars.dicebear.com/api/bottts/${props.walletAddress}.svg`;
   }
 
   function logoutClick() {
@@ -20,7 +21,7 @@ export const NavBar = (props: NavBarProps) => {
 
   return (
     <>
-      <Box id="navbar" bg="#181818" w="100%" h="64px" paddingLeft="32px" paddingTop="16px" paddingRight="32px" borderBottom={"1px"} borderBottomColor="#313131">
+      <Box id="navbar" bg="#181818" w="100%" h="66px" paddingLeft="32px" paddingTop="16px" paddingRight="32px" borderBottom={"1px"} borderBottomColor="#313131">
         <Flex>
           <HStack spacing="13px">
             <img src={Logo} alt="Hovermint" style={{width: "32px", height: "32px"}}/>
@@ -30,7 +31,7 @@ export const NavBar = (props: NavBarProps) => {
           </HStack>
           <Spacer/>
           <HStack spacing="13px">
-            <img src={Logo} alt="Hovermint" style={{width: "32px", height: "32px", borderRadius:"69px"}}/>
+            <img id="Avatar" src={Logo} alt="Hovermint" style={{width: "36px", height: "36px", borderRadius:"69px"}}/>
             <Text color="white" fontFamily={"Roboto"} fontWeight={"bold"}>
               {walletAddressShort}
             </Text>
