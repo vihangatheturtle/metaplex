@@ -64,6 +64,7 @@ const Home = (props: HomeProps) => {
   const [currentCmid, setCmid] = useState("")
   const [isAutoMinting, setIsAutoMinting] = useState(false)
   const [mintAmount, setMintAmount] = useState(1)
+  const [mintCheckNumber, setMintCheckNumber] = useState(0)
 
   const rpcUrl = props.rpcHost;
   const wallet = useWallet();
@@ -140,11 +141,14 @@ const Home = (props: HomeProps) => {
   }
 
   const onMint = async () => {
-    if (candyMachine?.state?.isSoldOut)
+    if (mintAmount === mintCheckNumber)
       return false;
     async function mintTokenEZ(amount: number) {
       if (amount === 1) {
+        if (mintAmount !== mintCheckNumber) {
         try {
+          if (mintAmount === mintCheckNumber)
+            return false;
           setIsUserMinting(true);
           document.getElementById('#identity')?.click();
           if (wallet.connected && candyMachine?.program && wallet.publicKey) {
@@ -202,18 +206,24 @@ const Home = (props: HomeProps) => {
           });
         } finally {
           setIsUserMinting(false);
-        }
-      } else if (amount > 1) {
-        if (wallet.connected && candyMachine?.program && wallet.publicKey) {
-          await mintMultipleTokens(candyMachine, wallet.publicKey, amount, props.txTimeout, props.connection, mintSuccess, mintFailure);
+          window.localStorage.isMintingFinished = true;
         }
       }
+      } else if (amount > 1) {
+        if (wallet.connected && candyMachine?.program && wallet.publicKey) {
+          if (mintAmount !== mintCheckNumber)
+            await mintMultipleTokens(candyMachine, wallet.publicKey, amount, props.txTimeout, props.connection, mintSuccess, mintFailure);
+          else
+            window.localStorage.isMintingFinished = true;
+        }
+      }
+      setMintCheckNumber(mintCheckNumber + 1)
     }
     //var cmAmount = 1;
     //if (!isNaN(parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value))) {
     //  cmAmount = parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value);
     //}
-    mintTokenEZ(mintAmount)
+    await mintTokenEZ(mintAmount)
     return true;
   };
 

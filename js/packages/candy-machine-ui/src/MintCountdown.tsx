@@ -3,6 +3,8 @@ import Countdown from 'react-countdown';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
 import { CandyMachineAccount } from './candy-machine';
 import {Box, Center, Flex, HStack, Spacer, Text, Stack, Switch} from '@chakra-ui/react'
+import { useEffect, useState } from 'react';
+import { GatewayStatus, useGateway } from '@civic/solana-gateway-react';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -51,7 +53,6 @@ interface MintCountdownProps {
   date: Date | undefined;
   style?: React.CSSProperties;
   status?: string;
-  onComplete?: () => void;
   cm?: CandyMachineAccount;
   onm: () => Promise<boolean>;
   autoMint: boolean;
@@ -65,40 +66,66 @@ interface MintCountdownRender {
   completed: boolean;
 }
 
-function AutoMint(onMint: () => Promise<boolean>) {
-  setTimeout(async () => {
-     const check: boolean = await onMint();
-     if (check) {
-      (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
-      (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
-     }
-  }, 2000);
-}
 
-export const MintCountdown: React.FC<MintCountdownProps> = ({
-  date,
-  status,
-  style,
-  onComplete,
-  onm,
-  autoMint,
-}) => {
+export const MintCountdown: React.FC<MintCountdownProps> = ({ date, status, style, onm, autoMint, }) => {
   const classes = useStyles();
-  const renderCountdown = ({
-    days,
-    hours,
-    minutes,
-    seconds,
-    completed,
-  }: MintCountdownRender) => {
-    hours += days * 24;
-    if (completed) {
-      console.log("Countdown complete");
-      try {
-        if (autoMint) {
-          AutoMint(onm)
+  const [autoMintState, setAutoMintState] = useState(true);
+  const { requestGatewayToken, gatewayStatus } = useGateway();
+
+  //async function AutoMint(onMint: () => Promise<boolean>) {
+  //  const delay = (ms: any) => new Promise(res => setTimeout(res, ms));
+  //  await delay(2000);
+  //  let check;
+  //  if (autoMintState) {
+  //    check = await onMint();
+  //  }
+//
+  //  if (check) {
+  //  (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
+  //  (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
+  //  }
+  //  else {
+  //    setAutoMintState(false);
+  //  }
+  //}
+
+  useEffect(() => {
+    if (checkIfMidnight(date)){
+    try {
+      if (autoMint) {
+        console.log(gatewayStatus)
+        if (gatewayStatus === GatewayStatus.ACTIVE) {
+          onm();
         }
-      } catch { }
+        else {
+
+          requestGatewayToken()
+        }
+      }
+    } catch { }
+  }
+  }, [date, autoMint, gatewayStatus, onm, requestGatewayToken]);
+
+  const checkIfMidnight = (date: Date | undefined) => {
+    if (date === undefined)
+        return false;
+    if (date.getHours() === 0 && date.getMinutes() === 0 && date.getSeconds() === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  const renderCountdown = (date: Date | undefined) => {
+    if (date === undefined)
+      return <div>No Date</div>;
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var days = date.getDate();
+    hours += days * 24;
+    if (checkIfMidnight(date)) {
+      console.log("Countdown complete");
+      console.log(status)
       return status ? (
         <Stack spacing={"-8px"} paddingTop="2px">
           <Flex>
@@ -124,11 +151,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
 
   if (date) {
     return (
-      <Countdown
-        date={date}
-        onComplete={onComplete}
-        renderer={renderCountdown}
-      />
+      renderCountdown(date)
     );
   } else {
     return <span>Loading..</span>;
