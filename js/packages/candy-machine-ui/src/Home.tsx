@@ -8,6 +8,7 @@ import Alert from '@material-ui/lab/Alert';
 import { PublicKey } from '@solana/web3.js';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletDialogButton } from '@solana/wallet-adapter-material-ui';
+import DiscordWebhook from 'discord-webhook-ts';
 import {
   awaitTransactionSignatureConfirmation,
   CandyMachineAccount,
@@ -161,12 +162,35 @@ const Home = (props: HomeProps) => {
     }
   }, [anchorWallet, props.candyMachineId, props.connection]);
 
+  function discordSuccess() {
+    try {
+      const discordClient = new DiscordWebhook('https://discord.com/api/webhooks/939968302292299858/QSJHIVYEOzCYoUh-9fDqjZ0d1NWIgBSWZKxDkXWI0plNWCqwGEnKjic9dVwbsczh3unA');
+
+      discordClient.modify({
+        name: 'Hover Mint',
+        avatar: 'https://media.discordapp.net/attachments/934430087460290610/934524403545407598/Group_1002.png',
+      }).then(() => { })
+
+      discordClient.execute({
+        name: 'Hover Mint',
+        avatar: 'https://media.discordapp.net/attachments/934430087460290610/934524403545407598/Group_1002.png',
+        embeds: [
+            {
+                title: 'Mint succeeded',
+                description: 'CMID: ' + currentCmid,
+            }
+        ]
+      }).then(() => { })
+    } catch { }
+  }
+
   function mintSuccess() {
     setAlertState({
       open: true,
       message: 'Congratulations! Mint succeeded!',
       severity: 'success',
     });
+    discordSuccess();
   }
 
   function mintFailure() {
@@ -225,6 +249,7 @@ const Home = (props: HomeProps) => {
                 message: 'Congratulations! Mint succeeded!',
                 severity: 'success',
               });
+              discordSuccess();
             } else {
               setAlertState({
                 open: true,
