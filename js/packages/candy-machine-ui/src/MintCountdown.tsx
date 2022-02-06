@@ -114,11 +114,17 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
       </Stack>) : null;
     } else {
       return (
-        <Box>
-            <Text fontSize="lg" fontWeight="bold" fontFamily={"Inter"} color="white">
-            {hours < 10 ? `0${hours}` : hours}:{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-            </Text>
-        </Box>
+        <Stack spacing={"-8px"} paddingTop="2px">
+          <Flex>
+            <Spacer/>
+          <Text fontSize="12px" paddingTop="2px" fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
+            COUNTDDOWN
+          </Text>
+        </Flex>
+        <Text fontSize="30px" paddingTop="2px" fontWeight="bold" fontFamily={"Inter"} color="white">
+          {hours < 10 ? `0${hours}` : hours}:{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        </Text>
+      </Stack>
       );
     }
   };
