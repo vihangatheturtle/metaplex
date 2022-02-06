@@ -28,7 +28,7 @@ import { CMInput } from './cmInput';
 */ // ADD LATER
 import { NavBar } from './NavBar';
 import { mintMultipleTokens } from './candy-machine';
-import {Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip} from '@chakra-ui/react'
+import { Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip,  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 360px;
@@ -63,6 +63,7 @@ const Home = (props: HomeProps) => {
   });
   const [currentCmid, setCmid] = useState("")
   const [isAutoMinting, setIsAutoMinting] = useState(false)
+  const [mintAmount, setMintAmount] = useState(1)
 
   const rpcUrl = props.rpcHost;
   const wallet = useWallet();
@@ -208,11 +209,11 @@ const Home = (props: HomeProps) => {
         }
       }
     }
-    var cmAmount = 1;
-    if (!isNaN(parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value))) {
-      cmAmount = parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value);
-    }
-    mintTokenEZ(cmAmount)
+    //var cmAmount = 1;
+    //if (!isNaN(parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value))) {
+    //  cmAmount = parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value);
+    //}
+    mintTokenEZ(mintAmount)
     return true;
   };
 
@@ -289,26 +290,27 @@ const Home = (props: HomeProps) => {
                   </Stack>
                 </Center>
               </Box>
-              <Box h="180px" w="400px" bg="#1E1E1E" border="1px" borderColor={"#313131"} paddingTop="12px">
+              <Box h="240px" w="400px" bg="#1E1E1E" border="1px" borderColor={"#313131"} paddingTop="12px">
                 <Center>
-                  <Stack>
+                  <Stack spacing={25}>
+                    <Stack>
                     <Flex>
-                    <HStack>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2.81472 13.1853C3.12397 13.495 3.49137 13.7406 3.8958 13.9078C4.30023 14.0751 4.73373 14.1608 5.17139 14.16C5.60914 14.1608 6.04273 14.0751 6.44727 13.9078C6.85181 13.7405 7.21933 13.495 7.52872 13.1853L9.41406 11.2993L8.47139 10.3567L6.58606 12.2427C6.21037 12.6167 5.70184 12.8266 5.17172 12.8266C4.64161 12.8266 4.13308 12.6167 3.75739 12.2427C3.38306 11.8671 3.17286 11.3586 3.17286 10.8283C3.17286 10.2981 3.38306 9.78951 3.75739 9.414L5.64339 7.52866L4.70072 6.58599L2.81472 8.47133C2.19059 9.09697 1.84009 9.94461 1.84009 10.8283C1.84009 11.712 2.19059 12.5597 2.81472 13.1853V13.1853ZM13.1854 7.52866C13.8092 6.90285 14.1595 6.05527 14.1595 5.17166C14.1595 4.28805 13.8092 3.44047 13.1854 2.81466C12.5598 2.19053 11.7121 1.84003 10.8284 1.84003C9.94467 1.84003 9.09703 2.19053 8.47139 2.81466L6.58606 4.70066L7.52872 5.64333L9.41406 3.75733C9.78974 3.38332 10.2983 3.17335 10.8284 3.17335C11.3585 3.17335 11.867 3.38332 12.2427 3.75733C12.6171 4.13284 12.8273 4.64144 12.8273 5.17166C12.8273 5.70188 12.6171 6.21048 12.2427 6.58599L10.3567 8.47133L11.2994 9.414L13.1854 7.52866Z" fill="#a9a9a9"/>
-                    <path d="M5.64255 11.3L4.69922 10.3573L10.3572 4.70001L11.2999 5.64335L5.64255 11.3Z" fill="#a9a9a9"/>
-                    </svg>
-                    <Text paddingTop="1px" fontSize="12px" fontFamily="Inter" color="#a9a9a9">
-                        CMID
-                    </Text>
-                    </HStack>
-                    <Spacer/>
-                    <Tooltip label="We are not liable for any lost money via scams, honeypots or any other method" aria-label='A tooltip' bg="#141414" placement="left-end" hasArrow arrowSize={9}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 0C3.13438 0 0 3.13438 0 7C0 10.8656 3.13438 14 7 14C10.8656 14 14 10.8656 14 7C14 3.13438 10.8656 0 7 0ZM7.5 10.375C7.5 10.4438 7.44375 10.5 7.375 10.5H6.625C6.55625 10.5 6.5 10.4438 6.5 10.375V6.125C6.5 6.05625 6.55625 6 6.625 6H7.375C7.44375 6 7.5 6.05625 7.5 6.125V10.375ZM7 5C6.80374 4.99599 6.61687 4.91522 6.47948 4.775C6.3421 4.63478 6.26515 4.4463 6.26515 4.25C6.26515 4.0537 6.3421 3.86522 6.47948 3.725C6.61687 3.58478 6.80374 3.50401 7 3.5C7.19626 3.50401 7.38313 3.58478 7.52052 3.725C7.6579 3.86522 7.73485 4.0537 7.73485 4.25C7.73485 4.4463 7.6579 4.63478 7.52052 4.775C7.38313 4.91522 7.19626 4.99599 7 5Z" fill="#F24E1E"/>
-                    </svg>
-                    </Tooltip>
-                    </Flex>
+                      <HStack>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.81472 13.1853C3.12397 13.495 3.49137 13.7406 3.8958 13.9078C4.30023 14.0751 4.73373 14.1608 5.17139 14.16C5.60914 14.1608 6.04273 14.0751 6.44727 13.9078C6.85181 13.7405 7.21933 13.495 7.52872 13.1853L9.41406 11.2993L8.47139 10.3567L6.58606 12.2427C6.21037 12.6167 5.70184 12.8266 5.17172 12.8266C4.64161 12.8266 4.13308 12.6167 3.75739 12.2427C3.38306 11.8671 3.17286 11.3586 3.17286 10.8283C3.17286 10.2981 3.38306 9.78951 3.75739 9.414L5.64339 7.52866L4.70072 6.58599L2.81472 8.47133C2.19059 9.09697 1.84009 9.94461 1.84009 10.8283C1.84009 11.712 2.19059 12.5597 2.81472 13.1853V13.1853ZM13.1854 7.52866C13.8092 6.90285 14.1595 6.05527 14.1595 5.17166C14.1595 4.28805 13.8092 3.44047 13.1854 2.81466C12.5598 2.19053 11.7121 1.84003 10.8284 1.84003C9.94467 1.84003 9.09703 2.19053 8.47139 2.81466L6.58606 4.70066L7.52872 5.64333L9.41406 3.75733C9.78974 3.38332 10.2983 3.17335 10.8284 3.17335C11.3585 3.17335 11.867 3.38332 12.2427 3.75733C12.6171 4.13284 12.8273 4.64144 12.8273 5.17166C12.8273 5.70188 12.6171 6.21048 12.2427 6.58599L10.3567 8.47133L11.2994 9.414L13.1854 7.52866Z" fill="#a9a9a9"/>
+                        <path d="M5.64255 11.3L4.69922 10.3573L10.3572 4.70001L11.2999 5.64335L5.64255 11.3Z" fill="#a9a9a9"/>
+                        </svg>
+                        <Text paddingTop="1px" fontSize="12px" fontFamily="Inter" color="#a9a9a9">
+                            CMID
+                        </Text>
+                      </HStack>
+                        <Spacer/>
+                        <Tooltip label="We are not liable for any lost money via scams, honeypots or any other method" aria-label='A tooltip' bg="#141414" placement="left-end" hasArrow arrowSize={9}>
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M7 0C3.13438 0 0 3.13438 0 7C0 10.8656 3.13438 14 7 14C10.8656 14 14 10.8656 14 7C14 3.13438 10.8656 0 7 0ZM7.5 10.375C7.5 10.4438 7.44375 10.5 7.375 10.5H6.625C6.55625 10.5 6.5 10.4438 6.5 10.375V6.125C6.5 6.05625 6.55625 6 6.625 6H7.375C7.44375 6 7.5 6.05625 7.5 6.125V10.375ZM7 5C6.80374 4.99599 6.61687 4.91522 6.47948 4.775C6.3421 4.63478 6.26515 4.4463 6.26515 4.25C6.26515 4.0537 6.3421 3.86522 6.47948 3.725C6.61687 3.58478 6.80374 3.50401 7 3.5C7.19626 3.50401 7.38313 3.58478 7.52052 3.725C7.6579 3.86522 7.73485 4.0537 7.73485 4.25C7.73485 4.4463 7.6579 4.63478 7.52052 4.775C7.38313 4.91522 7.19626 4.99599 7 5Z" fill="#F24E1E"/>
+                          </svg>
+                        </Tooltip>
+                      </Flex>
                     <Stack spacing="25px">
                       <input className="cmidInput" placeholder="Enter Candy Machine ID" value={currentCmid} onInput={(e: React.ChangeEvent<HTMLInputElement> ) => {setCmid(e.target.value)}} onKeyPress={handleCmidInutKeyDown}/>
                       <Flex>
@@ -323,6 +325,7 @@ const Home = (props: HomeProps) => {
                         <Spacer/>
                         <Switch size='lg' colorScheme="all" onChange={isAutoMint} isChecked={isAutoMinting}/>
                       </Flex>
+                    </Stack>
                     </Stack>
                     <Stack>
                       <Flex>
@@ -341,7 +344,13 @@ const Home = (props: HomeProps) => {
                           </svg>
                         </Tooltip>
                       </Flex>
-
+                      <NumberInput defaultValue={1} min={1} max={20} border="none" value={mintAmount} onChange={(valueAsNumber: any) => setMintAmount(parseInt(valueAsNumber))} allowMouseWheel>
+                        <NumberInputField h="35px" w="360px" bg="#2f2f2f" color="white" border="none" />
+                        <NumberInputStepper outline="none">
+                          <NumberIncrementStepper color="white" border="none" />
+                          <NumberDecrementStepper color="white" border="none"/>
+                        </NumberInputStepper>
+                      </NumberInput>
                     </Stack>
                   </Stack>
                 </Center>
