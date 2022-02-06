@@ -13,6 +13,10 @@ export const CMInput = () => {
 }
 
 function selectNewCMID() {
-  console.log("Switching CMID");
-  window.location.href = 'https://' + window.location.host + '?cmid=' + (document.getElementById('cmidTB') as HTMLInputElement).value;
+  if ((document.getElementById('cmidTB') as HTMLInputElement).value !== '' && (document.getElementById('cmidTB') as HTMLInputElement).value !== undefined && (document.getElementById('cmidTB') as HTMLInputElement).value !== null && (document.getElementById('cmidTB') as HTMLInputElement).value.length == 44) {
+    console.log("Switching CMID");
+    window.location.href = 'https://' + window.location.host + '?cmid=' + (document.getElementById('cmidTB') as HTMLInputElement).value;
+  } else {
+    console.log("Invalid CMID");
+  }
 }
