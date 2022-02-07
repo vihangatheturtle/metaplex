@@ -300,10 +300,6 @@ const Home = (props: HomeProps) => {
       }
       setMintCheckNumber(mintCheckNumber + 1)
     }
-    //var cmAmount = 1;
-    //if (!isNaN(parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value))) {
-    //  cmAmount = parseInt((document.getElementById('candyMintAmount') as HTMLInputElement).value);
-    //}
     await mintTokenEZ(mintAmount)
     return true;
   };
