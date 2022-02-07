@@ -20,55 +20,10 @@ import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
 import { createBrowserHistory } from 'history';
 import { verifyKey } from '../utils/hyperauth';
-/*
-import { AutoMintCheckbox } from './AutoMint'
-import { MintAmount } from './CandyMintAmount';
-*/ // ADD LATER
 import { NavBar } from './NavBar';
 import { mintMultipleTokens } from '../utils/candy-machine';
 import { Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip,  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
 
-async function auth() {
-  async function startAuth(key: string) {
-    var res = await verifyKey(key)
-
-    if (res !== true) {
-      console.log("Invalid license key");
-      localStorage.removeItem('license');
-      document.body.remove();
-      alert("Please refresh the page and use a valid license key");
-    } else {
-      console.log("Valid license key");
-      document.body.style.display = 'block';
-      document.body.style.opacity = "1";
-    }
-  }
-
-  async function main() {
-    var savedKey = localStorage.getItem('license');
-
-    if (savedKey !== null && savedKey !== '' && savedKey !== undefined) {
-      console.log("Found saved license");
-      startAuth(savedKey);
-    } else {
-      console.log("No license found");
-      var key = window.prompt('Enter your license key');
-      if (key !== null && key !== '') {
-        localStorage.setItem('license', key);
-        startAuth(key);
-      } else {
-        console.log("Invalid license key");
-        localStorage.removeItem('license');
-        document.body.remove();
-        alert("Please refresh the page and use a valid license key");
-      }
-    }
-  }
-
-  main();
-}
-
-auth();
 
 const ConnectButton = styled(WalletDialogButton)`
   width: 360px;
@@ -114,6 +69,44 @@ const Home = (props: HomeProps) => {
       setCmid(props.rawCandyMachineID)
     }
   }, [props.rawCandyMachineID]);
+
+  async function startAuth(key: string) {
+    var res = await verifyKey(key)
+
+    if (res !== true) {
+      console.log("Invalid license key");
+      localStorage.removeItem('license');
+      window.location.reload();
+    } else {
+      console.log("Valid license key");
+      document.body.style.display = 'block';
+      document.body.style.opacity = "1";
+    }
+  }
+
+  async function auth() {
+      var savedKey = localStorage.getItem('license');
+
+      if (savedKey !== null && savedKey !== '' && savedKey !== undefined) {
+        console.log("Found saved license");
+        startAuth(savedKey);
+      } else {
+        console.log("No license found");
+        var key = window.prompt('Enter your license key');
+        if (key !== null && key !== '') {
+          localStorage.setItem('license', key);
+          startAuth(key);
+        } else {
+          console.log("Invalid license key");
+          localStorage.removeItem('license');
+          window.location.reload();
+        }
+      }
+  }
+
+  useEffect(() => {
+    auth();
+  })
 
   const isAutoMint = (event: React.ChangeEvent<HTMLInputElement>) => {
       //alert("Automint is not fully implemented, it will be available soon!")
@@ -364,10 +357,8 @@ const Home = (props: HomeProps) => {
                             </Text>
                             </HStack>
                           </Center>
-
                         </Box>
                       )
-
                     }
                   </Stack>
                 </Center>
@@ -440,65 +431,27 @@ const Home = (props: HomeProps) => {
               <Box h="160px" w="400px" bg="#1E1E1E" border="1px" borderBottomRadius={"5px"} borderColor={"#313131"} paddingTop="12px">
                   <Center>
                   {!wallet.connected ? (
-                      ""
+                    <Box marginTop="45px">
+                      <ConnectButton>Click to connect wallet</ConnectButton>
+                    </Box>
                     ) : (
-                      <>
-                        <Box>
-                          <Stack spacing="10px">
-                        <Header
-                          candyMachine={candyMachine}
-                          onMint={onMint}
-                          autoMint={isAutoMinting}
-                        />
-
-                          {candyMachine?.state.isActive &&
-                          candyMachine?.state.gatekeeper &&
-                          wallet.publicKey &&
-                          wallet.signTransaction ? (
-                            <GatewayProvider
-                              wallet={{
-                                publicKey:
-                                  wallet.publicKey ||
-                                  new PublicKey(CANDY_MACHINE_PROGRAM),
-                                //@ts-ignore
-                                signTransaction: wallet.signTransaction,
-                              }}
-                              gatekeeperNetwork={
-                                candyMachine?.state?.gatekeeper?.gatekeeperNetwork
-                              }
-                              clusterUrl={rpcUrl}
-                              options={{ autoShowModal: false }}
-                            >
-                              <MintButton
-                                candyMachine={candyMachine}
-                                isMinting={isUserMinting}
-                                onMint={onMint}
-                              />
-                            </GatewayProvider>
-                          ) : (
-                            <MintButton
-                              candyMachine={candyMachine}
-                              isMinting={isUserMinting}
-                              onMint={onMint}
-                            />
-                          )}
-                          </Stack>
-                        </Box>
-                      </>
+                      <Stack spacing="10px">
+                        <Header candyMachine={candyMachine} onMint={onMint} autoMint={isAutoMinting} />
+                        {candyMachine?.state.isActive && candyMachine?.state.gatekeeper && wallet.publicKey && wallet.signTransaction ? (
+                          <GatewayProvider wallet={{publicKey:wallet.publicKey || new PublicKey(CANDY_MACHINE_PROGRAM), signTransaction: wallet.signTransaction}} gatekeeperNetwork={candyMachine?.state?.gatekeeper?.gatekeeperNetwork} clusterUrl={rpcUrl} options={{ autoShowModal: false }}>
+                            <MintButton candyMachine={candyMachine} isMinting={isUserMinting} onMint={onMint}/>
+                          </GatewayProvider>
+                        ) : (
+                          <MintButton candyMachine={candyMachine} isMinting={isUserMinting} onMint={onMint}/>
+                        )}
+                      </Stack>
                     )}
                   </Center>
               </Box>
             </Stack>
           </Box>
-        <Snackbar
-          open={alertState.open}
-          autoHideDuration={6000}
-          onClose={() => setAlertState({ ...alertState, open: false })}
-        >
-          <Alert
-            onClose={() => setAlertState({ ...alertState, open: false })}
-            severity={alertState.severity}
-          >
+        <Snackbar open={alertState.open} autoHideDuration={6000} onClose={() => setAlertState({ ...alertState, open: false })}>
+          <Alert onClose={() => setAlertState({ ...alertState, open: false })} severity={alertState.severity}>
             {alertState.message}
           </Alert>
         </Snackbar>

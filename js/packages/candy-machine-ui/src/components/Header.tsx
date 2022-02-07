@@ -28,7 +28,7 @@ export const Header = ({ candyMachine, onMint }: HeaderProps) => {
   return (
     <Flex>
         {candyMachine && (
-            <HStack spacing="41px">
+            <HStack spacing="20px">
             <Stack spacing={"8px"}>
               <Text fontSize="12px" fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
                 TYPE
@@ -43,6 +43,14 @@ export const Header = ({ candyMachine, onMint }: HeaderProps) => {
               </Text>
               <Text fontSize="18px" fontWeight="500" fontFamily={"Inter"} color="white">
                 {getMintPrice(candyMachine)}
+              </Text>
+            </Stack>
+            <Stack spacing={"8px"}>
+              <Text fontSize="12px" fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
+                REMAINING
+              </Text>
+              <Text fontSize="18px" fontWeight="500" fontFamily={"Inter"} color="white">
+                {candyMachine?.state.itemsRemaining}
               </Text>
             </Stack>
             </HStack>

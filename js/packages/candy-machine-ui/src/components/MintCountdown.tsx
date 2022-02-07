@@ -81,14 +81,14 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
     hours += days * 24;
     if (completed) {
       return status ? (
-        <Stack spacing={"-8px"} paddingTop="2px">
+        <Stack spacing={"-8px"}>
           <Flex>
             <Spacer/>
-          <Text fontSize="12px" paddingTop="2px" fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
+          <Text fontSize="12px"  fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
             COUNTDDOWN
           </Text>
         </Flex>
-        <Text fontSize="30px" paddingTop="2px" fontWeight="bold" fontFamily={"Inter"} color="white">
+        <Text fontSize="26px" paddingTop="6px" fontWeight="bold" fontFamily={"Inter"} color="white">
           Completed
         </Text>
       </Stack>) : null;
