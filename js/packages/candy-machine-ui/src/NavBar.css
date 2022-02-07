@@ -1,9 +1,0 @@
-#navbar {
-    position: absolute;
-    width: 100%;
-    left: 0;
-}
-
-#logoutBtn:hover {
-    cursor: pointer;
-}

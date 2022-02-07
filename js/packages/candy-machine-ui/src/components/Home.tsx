@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import * as anchor from '@project-serum/anchor';
-
-import './Home.css';
 import styled from 'styled-components';
 import { Snackbar } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
@@ -15,21 +13,19 @@ import {
   CANDY_MACHINE_PROGRAM,
   getCandyMachineState,
   mintOneToken,
-} from './candy-machine';
-import { AlertState } from './utils';
+} from '../lib/candy-machine';
+import { AlertState } from '../lib/utils';
 import { Header } from './Header';
 import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
 import { createBrowserHistory } from 'history';
-import { verifyKey } from './HyperAuth';
+import { verifyKey } from '../lib/hyperauth';
 /*
 import { AutoMintCheckbox } from './AutoMint'
 import { MintAmount } from './CandyMintAmount';
-import { AppNote } from './AppNote';
-import { CMInput } from './cmInput';
 */ // ADD LATER
 import { NavBar } from './NavBar';
-import { mintMultipleTokens } from './candy-machine';
+import { mintMultipleTokens } from '../lib/candy-machine';
 import { Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip,  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
 
 async function auth() {

@@ -1,6 +1,5 @@
-import './NavBar.css'
 import {Box, Flex, HStack, Spacer, Text} from '@chakra-ui/react'
-import Logo from "./img/logo.png"
+import Logo from "../img/logo.png"
 
 interface NavBarProps {
   walletAddress: string,

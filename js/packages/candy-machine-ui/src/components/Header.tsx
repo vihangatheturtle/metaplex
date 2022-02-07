@@ -3,8 +3,8 @@ import * as anchor from '@project-serum/anchor';
 //import Grid from '@material-ui/core/Grid';
 //import Typography from '@material-ui/core/Typography';
 import { MintCountdown } from './MintCountdown';
-import { toDate, formatNumber } from './utils';
-import { CandyMachineAccount } from './candy-machine';
+import { toDate, formatNumber } from '../lib/utils';
+import { CandyMachineAccount } from '../lib/candy-machine';
 import { Flex, HStack, Spacer, Text, Stack } from '@chakra-ui/react'
 //import { useState } from 'react';
 //import { ContactSupportOutlined } from '@material-ui/icons';
