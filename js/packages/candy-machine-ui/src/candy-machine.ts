@@ -281,7 +281,9 @@ export const mintMultipleTokens = async (
 ) => {
   var done = 0;
   async function nextMint() {
-    console.log("Started mint")
+    var taskID = Math.random().toString().split('.').join('');
+
+    console.log("[MultiMint-" + taskID + "] Started mint")
     var txid = (await mintOneToken(candyMachine, payer))[0];
     if (mintCBS && mintCBF) {
       let status: any = { err: true };
@@ -295,9 +297,10 @@ export const mintMultipleTokens = async (
       }
 
       if (status && !status.err) {
-        console.log("Transaction successful? " + status)
+        console.log("[MultiMint-" + taskID + "] Mint succeeded: " + txid);
         mintCBS();
       } else {
+        console.log("[MultiMint-" + taskID + "] Mint failed");
         mintCBF();
       }
     }

@@ -67,11 +67,14 @@ interface MintCountdownRender {
 
 function AutoMint(onMint: () => Promise<boolean>) {
   setTimeout(async () => {
+     /*
      const check: boolean = await onMint();
      if (check) {
       (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
       (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
      }
+     */
+    console.log("(MintCountdown:77) Ignored auto mint request");
   }, 2000);
 }
 

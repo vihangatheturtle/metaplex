@@ -65,6 +65,9 @@ export const Header = ({ candyMachine, onMint, autoMint }: HeaderProps) => {
           }
           onm={onMint}
           autoMint={autoMint}
+          onComplete={() => {
+            alert(alert(new Date().toString()));
+          }}
         />
 </Flex>
   );

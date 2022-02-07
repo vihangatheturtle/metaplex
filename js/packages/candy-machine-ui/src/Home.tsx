@@ -108,7 +108,7 @@ const Home = (props: HomeProps) => {
     severity: undefined,
   });
   const [currentCmid, setCmid] = useState("")
-  const [isAutoMinting] = useState(false)
+  const [isAutoMinting, setIsAutoMinting] = useState(false)
   const [mintAmount, setMintAmount] = useState(1)
   const [mintCheckNumber, setMintCheckNumber] = useState(0)
 
@@ -123,8 +123,9 @@ const Home = (props: HomeProps) => {
 
   const isAutoMint = (event: React.ChangeEvent<HTMLInputElement>) => {
       alert("Automint is not fully implemented, it will be available soon!")
-      //setIsAutoMinting(event.target.checked)
-      event.target.checked = false;
+      setIsAutoMinting(event.target.checked)
+      event.target.checked = isAutoMinting;
+      //event.target.checked = false;
   }
 
   const anchorWallet = useMemo(() => {
