@@ -13,19 +13,19 @@ import {
   CANDY_MACHINE_PROGRAM,
   getCandyMachineState,
   mintOneToken,
-} from '../lib/candy-machine';
-import { AlertState } from '../lib/utils';
+} from '../utils/candy-machine';
+import { AlertState } from '../utils/utils';
 import { Header } from './Header';
 import { MintButton } from './MintButton';
 import { GatewayProvider } from '@civic/solana-gateway-react';
 import { createBrowserHistory } from 'history';
-import { verifyKey } from '../lib/hyperauth';
+import { verifyKey } from '../utils/hyperauth';
 /*
 import { AutoMintCheckbox } from './AutoMint'
 import { MintAmount } from './CandyMintAmount';
 */ // ADD LATER
 import { NavBar } from './NavBar';
-import { mintMultipleTokens } from '../lib/candy-machine';
+import { mintMultipleTokens } from '../utils/candy-machine';
 import { Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip,  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
 
 async function auth() {

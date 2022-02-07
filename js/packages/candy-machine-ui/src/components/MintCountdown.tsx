@@ -1,7 +1,7 @@
 //import { Paper } from '@material-ui/core';
 import Countdown from 'react-countdown';
 import { Theme, createStyles, makeStyles } from '@material-ui/core/styles';
-import { CandyMachineAccount } from '../lib/candy-machine';
+import { CandyMachineAccount } from '../utils/candy-machine';
 import {Flex, Spacer, Text, Stack} from '@chakra-ui/react'
 
 const useStyles = makeStyles((theme: Theme) =>
