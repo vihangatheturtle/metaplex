@@ -1,7 +1,8 @@
 import * as anchor from '@project-serum/anchor';
+import { bs58 } from '@project-serum/anchor/dist/utils/bytes';
 
 import { MintLayout, TOKEN_PROGRAM_ID, Token } from '@solana/spl-token';
-import { SystemProgram } from '@solana/web3.js';
+import { PublicKey, SystemProgram } from '@solana/web3.js';
 import { sendTransactions } from './connection';
 
 import {
@@ -233,6 +234,31 @@ const getMetadata = async (
       TOKEN_METADATA_PROGRAM_ID,
     )
   )[0];
+};
+
+export const getMintAddresses = async (firstCreatorAddress: anchor.web3.PublicKey, connection: anchor.web3.Connection) => {
+  console.log("Getting mint addresses for", firstCreatorAddress);
+  const metadataAccounts = await connection.getProgramAccounts(
+    TOKEN_METADATA_PROGRAM_ID,
+    {
+      filters: [
+        // Only get Metadata accounts.
+        { dataSize: 17 },
+
+        // Filter using the first creator.
+        {
+          memcmp: {
+            offset: 33,
+            bytes: firstCreatorAddress.toBase58(),
+          },
+        },
+      ],
+    },
+  );
+
+  return metadataAccounts.map((metadataAccountInfo) => (
+    metadataAccountInfo.account.data.toString()
+  ));
 };
 
 export const getCandyMachineCreator = async (

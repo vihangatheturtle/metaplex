@@ -15,6 +15,8 @@ import {
   CANDY_MACHINE_PROGRAM,
   getCandyMachineState,
   mintOneToken,
+  getMintAddresses,
+  getCandyMachineCreator,
 } from './candy-machine';
 import { AlertState } from './utils';
 import { Header } from './Header';
@@ -203,7 +205,7 @@ const Home = (props: HomeProps) => {
 
   const handleCmidInutKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
-      if (currentCmid.length === 44) {
+      if (currentCmid.length >= 43) {
         const history = createBrowserHistory();
         history.push(`/?cmid=${currentCmid}`);
         window.location.reload();
