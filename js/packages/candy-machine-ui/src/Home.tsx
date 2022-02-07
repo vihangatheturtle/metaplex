@@ -15,8 +15,6 @@ import {
   CANDY_MACHINE_PROGRAM,
   getCandyMachineState,
   mintOneToken,
-  getMintAddresses,
-  getCandyMachineCreator,
 } from './candy-machine';
 import { AlertState } from './utils';
 import { Header } from './Header';
@@ -122,7 +120,8 @@ const Home = (props: HomeProps) => {
   }, [props.rawCandyMachineID]);
 
   const isAutoMint = (event: React.ChangeEvent<HTMLInputElement>) => {
-      alert("Automint is not fully implemented, it will be available soon!")
+      //alert("Automint is not fully implemented, it will be available soon!")
+      console.log("AutoMint has been set to", event.target.checked);
       setIsAutoMinting(event.target.checked)
       event.target.checked = isAutoMinting;
       //event.target.checked = false;
@@ -410,7 +409,7 @@ const Home = (props: HomeProps) => {
                           </Text>
                         </HStack>
                         <Spacer/>
-                        <Switch size='lg' colorScheme="all" onChange={isAutoMint} isChecked={isAutoMinting}/>
+                        <Switch id="autoMintSwitch" size='lg' colorScheme="all" onChange={isAutoMint} isChecked={isAutoMinting}/>
                       </Flex>
                     </Stack>
                     </Stack>

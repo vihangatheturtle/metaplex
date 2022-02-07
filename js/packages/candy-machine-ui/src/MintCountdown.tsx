@@ -53,8 +53,6 @@ interface MintCountdownProps {
   status?: string;
   onComplete?: () => void;
   cm?: CandyMachineAccount;
-  onm: () => Promise<boolean>;
-  autoMint: boolean;
 }
 
 interface MintCountdownRender {
@@ -65,26 +63,11 @@ interface MintCountdownRender {
   completed: boolean;
 }
 
-function AutoMint(onMint: () => Promise<boolean>) {
-  setTimeout(async () => {
-     /*
-     const check: boolean = await onMint();
-     if (check) {
-      (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
-      (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
-     }
-     */
-    console.log("(MintCountdown:77) Ignored auto mint request");
-  }, 2000);
-}
-
 export const MintCountdown: React.FC<MintCountdownProps> = ({
   date,
   status,
   style,
   onComplete,
-  onm,
-  autoMint,
 }) => {
   //const classes = useStyles(); idk why this is here
   useStyles();
@@ -97,12 +80,6 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
   }: MintCountdownRender) => {
     hours += days * 24;
     if (completed) {
-      console.log("Countdown complete");
-      try {
-        if (autoMint) {
-          AutoMint(onm)
-        }
-      } catch { }
       return status ? (
         <Stack spacing={"-8px"} paddingTop="2px">
           <Flex>

@@ -6,6 +6,8 @@ import { MintCountdown } from './MintCountdown';
 import { toDate, formatNumber } from './utils';
 import { CandyMachineAccount } from './candy-machine';
 import { Flex, HStack, Spacer, Text, Stack } from '@chakra-ui/react'
+//import { useState } from 'react';
+//import { ContactSupportOutlined } from '@material-ui/icons';
 
 type HeaderProps = {
   candyMachine?: CandyMachineAccount;
@@ -13,10 +15,9 @@ type HeaderProps = {
   autoMint: boolean;
 };
 
-export const Header = ({ candyMachine, onMint, autoMint }: HeaderProps) => {
+export const Header = ({ candyMachine, onMint }: HeaderProps) => {
 
   const getType = () => {
-
       if (candyMachine?.state.isPresale) {
           return 'Presale';
       }
@@ -63,10 +64,26 @@ export const Header = ({ candyMachine, onMint, autoMint }: HeaderProps) => {
               ? 'PRESALE'
               : 'LIVE'
           }
-          onm={onMint}
-          autoMint={autoMint}
           onComplete={() => {
-            alert(alert(new Date().toString()));
+            console.log("NFT Release countdown complete");
+            try {
+              var doAutoMint = (document.getElementById('autoMintSwitch') as HTMLInputElement).checked;
+              if (doAutoMint) {
+                console.log("Automint enabled, starting AutoMint");
+                (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
+                (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'Starting AutoMint';
+                setTimeout(async () => {
+                  const check: boolean = await onMint();
+                  if (check) {
+                    (document.getElementById('NFTMintButton') as HTMLInputElement).disabled = true;
+                    (document.getElementById('NFTMintButton') as HTMLInputElement).innerHTML = 'AutoMint In Progress';
+                  }
+                }, 2500);
+              }
+            } catch (e) {
+              console.error("Failed to start AutoMint, error:");
+              console.error(e);
+            }
           }}
         />
 </Flex>
