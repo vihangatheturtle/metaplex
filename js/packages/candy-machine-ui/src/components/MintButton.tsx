@@ -12,7 +12,7 @@ export const CTAButton = styled(Button)`
   margin-top: 10px;
   margin-bottom: 5px;
   background: linear-gradient(180deg, #e682ff 0%, #db4dff 100%);
-  color: white !important;
+  color: white;
   font-size: 16px;
   font-weight: bold;
 `; // add your own styles here
@@ -21,10 +21,12 @@ export const MintButton = ({
   onMint,
   candyMachine,
   isMinting,
+  isDisabled,
 }: {
   onMint: () => Promise<boolean>;
   candyMachine?: CandyMachineAccount;
   isMinting: boolean;
+  isDisabled: boolean;
 }) => {
   const { requestGatewayToken, gatewayStatus } = useGateway();
   const [clicked, setClicked] = useState(false);
@@ -54,11 +56,8 @@ export const MintButton = ({
     <CTAButton
       id="NFTMintButton"
       disabled={
-        clicked ||
-        candyMachine?.state.isSoldOut ||
-        candyMachine?.state.isPresale ||
-        isMinting ||
-        !candyMachine?.state.isActive
+        (isDisabled ||
+        clicked) || candyMachine?.state.isSoldOut
       }
       onClick={async () => {
         setClicked(true);
@@ -74,6 +73,7 @@ export const MintButton = ({
         }
       }}
       variant="contained"
+      className={`${isDisabled || candyMachine?.state.isSoldOut ? '' : 'mint-button'}`}
     >
       {getMintButtonContent()}
     </CTAButton>

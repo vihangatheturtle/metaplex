@@ -66,3 +66,7 @@ body {
 #logoutBtn:hover {
   cursor: pointer;
 }
+
+.mint-button {
+  color: white !important;
+}

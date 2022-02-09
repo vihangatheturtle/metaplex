@@ -13,9 +13,10 @@ type HeaderProps = {
   candyMachine?: CandyMachineAccount;
   onMint: () => Promise<boolean>;
   autoMint: boolean;
+  setButtonDisabled: (disabled: boolean) => void;
 };
 
-export const Header = ({ candyMachine, onMint }: HeaderProps) => {
+export const Header = ({ candyMachine, onMint, setButtonDisabled }: HeaderProps) => {
 
   const getType = () => {
       if (candyMachine?.state.isPresale) {
@@ -73,6 +74,7 @@ export const Header = ({ candyMachine, onMint }: HeaderProps) => {
               : 'LIVE'
           }
           onComplete={() => {
+            setButtonDisabled(false);
             console.log("NFT Release countdown complete");
             try {
               var doAutoMint = (document.getElementById('autoMintSwitch') as HTMLInputElement).checked;
@@ -93,6 +95,7 @@ export const Header = ({ candyMachine, onMint }: HeaderProps) => {
               console.error(e);
             }
           }}
+          setButtonDisabled={setButtonDisabled}
         />
 </Flex>
   );

@@ -60,6 +60,7 @@ const Home = (props: HomeProps) => {
   const [isAutoMinting, setIsAutoMinting] = useState(false)
   const [mintAmount, setMintAmount] = useState(1)
   const [mintCheckNumber, setMintCheckNumber] = useState(0)
+  const [isMintButtonDisabled, setIsMintButtonDisabled] = useState(true)
 
   const rpcUrl = props.rpcHost;
   const wallet = useWallet();
@@ -171,7 +172,7 @@ const Home = (props: HomeProps) => {
                 description: 'CMID: ' + currentCmid,
             }
         ]
-      }).then(() => { })
+      })
     } catch { }
   }
 
@@ -436,13 +437,13 @@ const Home = (props: HomeProps) => {
                     </Box>
                     ) : (
                       <Stack spacing="10px">
-                        <Header candyMachine={candyMachine} onMint={onMint} autoMint={isAutoMinting} />
+                        <Header setButtonDisabled={setIsMintButtonDisabled} candyMachine={candyMachine} onMint={onMint} autoMint={isAutoMinting} />
                         {candyMachine?.state.isActive && candyMachine?.state.gatekeeper && wallet.publicKey && wallet.signTransaction ? (
                           <GatewayProvider wallet={{publicKey:wallet.publicKey || new PublicKey(CANDY_MACHINE_PROGRAM), signTransaction: wallet.signTransaction}} gatekeeperNetwork={candyMachine?.state?.gatekeeper?.gatekeeperNetwork} clusterUrl={rpcUrl} options={{ autoShowModal: false }}>
-                            <MintButton candyMachine={candyMachine} isMinting={isUserMinting} onMint={onMint}/>
+                            <MintButton candyMachine={candyMachine} isMinting={isUserMinting} onMint={onMint} isDisabled={isMintButtonDisabled}/>
                           </GatewayProvider>
                         ) : (
-                          <MintButton candyMachine={candyMachine} isMinting={isUserMinting} onMint={onMint}/>
+                          <MintButton candyMachine={candyMachine} isMinting={isUserMinting} onMint={onMint} isDisabled={isMintButtonDisabled}/>
                         )}
                       </Stack>
                     )}
