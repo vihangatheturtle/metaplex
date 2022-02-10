@@ -17,6 +17,7 @@ export const CTAButton = styled(Button)`
   font-weight: bold;
 `; // add your own styles here
 
+
 export const MintButton = ({
   onMint,
   candyMachine,
@@ -30,6 +31,7 @@ export const MintButton = ({
 }) => {
   const { requestGatewayToken, gatewayStatus } = useGateway();
   const [clicked, setClicked] = useState(false);
+  const [buttonData, setButtonData] = useState<String | JSX.Element>("Loading...");
 
   useEffect(() => {
     if (gatewayStatus === GatewayStatus.ACTIVE && clicked) {
@@ -38,19 +40,34 @@ export const MintButton = ({
     }
   }, [gatewayStatus, clicked, setClicked, onMint]);
 
-  const getMintButtonContent = () => {
+  useEffect(() => {
     if (candyMachine?.state.isSoldOut) {
-      return 'SOLD OUT';
+      setButtonData('SOLD OUT');
     } else if (isMinting) {
-      return <CircularProgress />;
+      setButtonData(<CircularProgress />);
     } else if (candyMachine?.state.isPresale) {
-      return 'PRESALE';
+      setButtonData('PRESALE');
     } else if (clicked && candyMachine?.state.gatekeeper) {
-      return <CircularProgress />;
+      setButtonData(<CircularProgress />);
     }
+    else {
+    setButtonData('Start Minting');
+    }
+  }, [candyMachine?.state.gatekeeper, candyMachine?.state.isPresale, candyMachine?.state.isSoldOut, clicked, isDisabled, isMinting])
 
-    return 'Start Minting';
-  };
+  //const getMintButtonContent = () => {
+  //  if (candyMachine?.state.isSoldOut) {
+  //    return 'SOLD OUT';
+  //  } else if (isMinting) {
+  //    return <CircularProgress />;
+  //  } else if (candyMachine?.state.isPresale) {
+  //    return 'PRESALE';
+  //  } else if (clicked && candyMachine?.state.gatekeeper) {
+  //    return <CircularProgress />;
+  //  }
+//
+  //  return 'Start Minting';
+  //};
 
   return (
     <CTAButton
@@ -75,7 +92,7 @@ export const MintButton = ({
       variant="contained"
       className={`${isDisabled || candyMachine?.state.isSoldOut ? '' : 'mint-button'}`}
     >
-      {getMintButtonContent()}
+      {buttonData}
     </CTAButton>
   );
 };

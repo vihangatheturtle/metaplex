@@ -149,7 +149,11 @@ const Home = (props: HomeProps) => {
         setCandyMachine(cndy);
       } catch (e) {
         console.log('There was a problem fetching Candy Machine state');
-        console.log(e);
+        setAlertState({
+          open: true,
+          message: 'Candy machine ID is invalid! Please enter a valid one.',
+          severity: 'error',
+        });
       }
     }
   }, [anchorWallet, props.candyMachineId, props.connection]);
@@ -316,7 +320,7 @@ const Home = (props: HomeProps) => {
       <NavBar
         walletAddress={staticWalletAddress}
       />
-      <Box style={{ marginTop: 180 }}>
+      <Box style={{ marginTop: 160 }}>
           <Box w="400px">
             <Stack spacing="3px">
               <Box h="100px" w="400px" bg="#1E1E1E" borderTopRadius="6px" border="1px" borderColor={"#313131"} paddingTop="12px">
@@ -433,7 +437,7 @@ const Home = (props: HomeProps) => {
                   <Center>
                   {!wallet.connected ? (
                     <Box marginTop="45px">
-                      <ConnectButton>Click to connect wallet</ConnectButton>
+                      <ConnectButton>Click to connect</ConnectButton>
                     </Box>
                     ) : (
                       <Stack spacing="10px">

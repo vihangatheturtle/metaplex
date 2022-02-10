@@ -5,11 +5,13 @@ import Home from './Home';
 import { clusterApiUrl } from '@solana/web3.js';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import {
-  getPhantomWallet,
-  getSlopeWallet,
-  getSolflareWallet,
-  getSolletWallet,
-  getSolletExtensionWallet,
+  LedgerWalletAdapter,
+  PhantomWalletAdapter,
+  SlopeWalletAdapter,
+  SolflareWalletAdapter,
+  SolletExtensionWalletAdapter,
+  SolletWalletAdapter,
+  TorusWalletAdapter,
 } from '@solana/wallet-adapter-wallets';
 
 import {
@@ -85,11 +87,13 @@ const App = () => {
 
   const wallets = useMemo(
     () => [
-      getPhantomWallet(),
-      getSolflareWallet(),
-      getSlopeWallet(),
-      getSolletWallet({ network }),
-      getSolletExtensionWallet({ network }),
+      new PhantomWalletAdapter(),
+      new SlopeWalletAdapter(),
+      new SolflareWalletAdapter({ network }),
+      new TorusWalletAdapter(),
+      new LedgerWalletAdapter(),
+      new SolletWalletAdapter({ network }),
+      new SolletExtensionWalletAdapter({ network }),
     ],
     [],
   );
@@ -101,14 +105,14 @@ const App = () => {
           <WalletProvider wallets={wallets} autoConnect>
             <WalletDialogProvider>
               <Center>
-              <Home
-                candyMachineId={candyMachineId}
-                rawCandyMachineID={rawCandyMachineID}
-                connection={connection}
-                startDate={startDateSeed}
-                txTimeout={txTimeoutInMilliseconds}
-                rpcHost={rpcHost}
-              />
+                <Home
+                  candyMachineId={candyMachineId}
+                  rawCandyMachineID={rawCandyMachineID}
+                  connection={connection}
+                  startDate={startDateSeed}
+                  txTimeout={txTimeoutInMilliseconds}
+                  rpcHost={rpcHost}
+                />
               </Center>
             </WalletDialogProvider>
           </WalletProvider>
