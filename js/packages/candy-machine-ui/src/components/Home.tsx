@@ -5,7 +5,6 @@ import { Snackbar } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { PublicKey } from '@solana/web3.js';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { WalletDialogButton } from '@solana/wallet-adapter-material-ui';
 import DiscordWebhook from 'discord-webhook-ts';
 import {
   awaitTransactionSignatureConfirmation,
@@ -24,17 +23,23 @@ import { NavBar } from './NavBar';
 import { mintMultipleTokens } from '../utils/candy-machine';
 import { Box, Center, Flex, HStack, Spacer, Text, Stack, Switch, Tooltip,  NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper } from '@chakra-ui/react'
 
+import {
+  WalletMultiButton
+} from '@solana/wallet-adapter-react-ui';
 
-const ConnectButton = styled(WalletDialogButton)`
+const ConnectButton = styled(WalletMultiButton)`
   width: 360px;
   height: 40px;
-  margin-top: 10px;
-  margin-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  align-items: center !important;
   background: linear-gradient(180deg, #141414 0%, #141414 100%);
   color: white;
-  font-size: 16px;
-  font-family: 'Roboto', sans-serif !important;
-  border: 1px solid black;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: medium !important;
 `;
 
 //const MintContainer = styled.div``; // add your owns styles here
@@ -348,7 +353,7 @@ const Home = (props: HomeProps) => {
                       </HStack>
                     </Flex>
                     {!wallet.connected ? (
-                      <ConnectButton>Click to connect</ConnectButton>
+                      <ConnectButton><Center>Click to connect</Center></ConnectButton>
                     ) :
                       (
                         <Box w="360px" h="40px" bg="#141414" borderRadius="5px" textAlign="center" color="white" paddingTop="12px">

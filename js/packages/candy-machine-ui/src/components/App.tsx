@@ -18,11 +18,14 @@ import {
   ConnectionProvider,
   WalletProvider,
 } from '@solana/wallet-adapter-react';
-import { WalletDialogProvider } from '@solana/wallet-adapter-material-ui';
+import {
+  WalletModalProvider
+} from '@solana/wallet-adapter-react-ui';
 
 import { ThemeProvider, createTheme } from '@material-ui/core';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { Center } from '@chakra-ui/react'
+import '@solana/wallet-adapter-react-ui/styles.css'
 
 const URLSearchParams = window.URLSearchParams;
 
@@ -103,7 +106,7 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <ConnectionProvider endpoint={endpoint}>
           <WalletProvider wallets={wallets} autoConnect>
-            <WalletDialogProvider>
+            <WalletModalProvider>
               <Center>
                 <Home
                   candyMachineId={candyMachineId}
@@ -114,7 +117,7 @@ const App = () => {
                   rpcHost={rpcHost}
                 />
               </Center>
-            </WalletDialogProvider>
+            </WalletModalProvider>
           </WalletProvider>
         </ConnectionProvider>
       </ThemeProvider>
