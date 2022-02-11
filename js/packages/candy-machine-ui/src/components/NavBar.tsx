@@ -25,14 +25,14 @@ export const NavBar = (props: NavBarProps) => {
         <Flex>
           <HStack spacing="13px">
             <img src={Logo} alt="Hovermint" style={{width: "32px", height: "32px"}}/>
-            <Text color="white" fontFamily={"Roboto"} fontWeight={"bold"}>
+            <Text color="white" fontFamily={"mainfont"} fontWeight={"600"}>
               Hover Mint
             </Text>
           </HStack>
           <Spacer/>
           <HStack spacing="13px">
             <img id="Avatar" src={Logo} alt="Hovermint" style={{width: "36px", height: "36px", borderRadius:"69px"}}/>
-            <Text color="white" fontFamily={"Roboto"} fontWeight={"bold"}>
+            <Text color="white" fontFamily={"mainfont"} fontWeight={"600"}>
               {walletAddressShort}
             </Text>
             <svg onClick={logoutClick} id="logoutBtn" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
