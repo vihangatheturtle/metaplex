@@ -104,7 +104,7 @@ export const MintCountdown: React.FC<MintCountdownProps> = ({
             COUNTDDOWN
           </Text>
           </Flex>
-        <Text fontSize="29px" paddingTop="2px" fontWeight="bold" fontFamily={"Inter"} color="white">
+        <Text fontSize="29px" paddingTop="2px" fontWeight="bold" fontFamily={"mainfont"} color="white">
           {hours < 10 ? `0${hours}` : hours}:{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
         </Text>
       </Stack>

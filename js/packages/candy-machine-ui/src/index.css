@@ -13,6 +13,52 @@ code {
     monospace;
 }
 
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Regular.otf);
+}
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Bold.otf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Thin.otf);
+  font-weight: 100;
+}
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Ultralight.otf);
+  font-weight: 200;
+}
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Light.otf);
+  font-weight: 300;
+}
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Regular.otf);
+  font-weight: 400;
+}
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Medium.otf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Bold.otf);
+  font-weight: 700;
+}
+@font-face {
+  font-family: mainfont;
+  src: url(./font/Suisse\ Int\'l\ Black.otf);
+  font-weight: 800;
+}
+
 
 .App {
   text-align: center;
@@ -43,6 +89,12 @@ body {
   outline: none;
   padding-left: 16px;
   padding-right: 16px;
+}
+
+.cmidInput::placeholder {
+  font-family: 'mainfont';
+  font-weight: 500;
+  color: #3f3f3f;
 }
 
 .cmidInputDiv {

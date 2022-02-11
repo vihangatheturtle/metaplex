@@ -25,7 +25,7 @@ import {
 import { ThemeProvider, createTheme } from '@material-ui/core';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { Center } from '@chakra-ui/react'
-import '@solana/wallet-adapter-react-ui/styles.css'
+import '../solanastyles.css';
 
 const URLSearchParams = window.URLSearchParams;
 

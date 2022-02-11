@@ -15,6 +15,7 @@ export const CTAButton = styled(Button)`
   color: white;
   font-size: 16px;
   font-weight: bold;
+  font-family: 'mainfont', sans-serif !important;
 `; // add your own styles here
 
 

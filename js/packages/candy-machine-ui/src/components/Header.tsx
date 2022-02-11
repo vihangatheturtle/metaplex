@@ -31,7 +31,7 @@ export const Header = ({ candyMachine, onMint, setButtonDisabled }: HeaderProps)
         {candyMachine && (
             <HStack spacing="20px">
             <Stack spacing={"8px"}>
-              <Text fontSize="12px" fontWeight="500" fontFamily={"Inter"} color="#A9A9A9">
+              <Text fontSize="12px" fontWeight="500" fontFamily={"mainfont"} color="#A9A9A9">
                 TYPE
               </Text>
               <Text fontSize="18px" fontWeight="500" fontFamily={"Inter"} color="white">
